@@ -48,6 +48,13 @@ body {
     }
 }
 
+.img1 a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none; /* Removes underline from links */
+}
+
 @media (max-width: 768px) {
     body {
         background-image: url('../images/background-1280x801.jpg'); /* Use smaller image for mobile */
