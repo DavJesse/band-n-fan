@@ -1,5 +1,14 @@
-body{
-    background-image: url(../images/background-1920x1201.jpg);
+body {
+    background-image: url('../images/background-1920x1201.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-color: #020816; /* Use magenta background at the edge of background image*/
+}
+
+@media (max-width: 768px) {
+    body {
+        background-image: url('../images/background-1280x801.jpg'); /* Use smaller image for mobile*/
+        background-color: #020816; 
+    }
 }
