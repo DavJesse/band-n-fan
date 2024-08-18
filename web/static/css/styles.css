@@ -1,0 +1,55 @@
+body {
+    background-image: url('../images/background-1920x1201.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #020816; /* Use magenta background at the edge of background image*/
+}
+
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background-color: rgba(2, 8, 22, 0.7);
+}
+
+.marquee-content {
+    display: inline-block;
+    white-space: nowrap;
+    width: auto;
+    padding-left: 100%;
+    animation: marquee 20s linear infinite;
+}
+
+.marquee-item {
+    display: inline-block;
+    margin-right: 20px;
+    height: 100%;
+    width: 200px;
+    overflow: hidden;
+}
+
+.marquee-item img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        background-image: url('../images/background-1280x801.jpg'); /* Use smaller image for mobile*/
+        background-color: #020816; 
+    }
+}
