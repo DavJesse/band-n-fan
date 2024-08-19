@@ -1,3 +1,3 @@
-module goupie-tracker
+module groupie-tracker
 
 go 1.18
