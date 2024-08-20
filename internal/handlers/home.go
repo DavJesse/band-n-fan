@@ -1,18 +1,22 @@
 package handlers
 
 import (
+	//"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	//"path/filepath"
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	//path := filepath.Join("web", "templates", "home.go")
 	if r.Method != "GET" {
 		http.Error(w, "Bad Request", http.StatusBadRequest)
 		return
 	}
+	//fmt.Println(path)
 
-	tmpl, err := template.ParseFiles("/../../web/templates/home.html")
+	tmpl, err := template.ParseFiles("C:\\Users\\pc\\OneDrive\\Desktop\\module\\groupie-tracker\\web\\templates\\home.html")
 
 	if err != nil {
 		http.Error(w, "Could not load home template", http.StatusInternalServerError)
