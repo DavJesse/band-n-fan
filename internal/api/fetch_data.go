@@ -4,38 +4,39 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 )
 
 type Artist struct {
-	Id           int      `json: "id"`
-	Image        string   `json: "image"`
-	Name         string   `json: "name"`
-	Members      []string `json: "members"`
-	CreationDate int      `json: "creationDate"`
-	FirstAlbum   string   `json: "firstAlbum"`
-	Locations    string   `json: "locations"`
-	ConcertDates string   `json: "concertDates"`
-	Relations    string   `json: "relations"`
+	Id           int      `json:"id"`
+	Image        string   `json:"image"`
+	Name         string   `json:"name"`
+	Members      []string `json:"members"`
+	CreationDate int      `json:"creationDate"`
+	FirstAlbum   string   `json:"firstAlbum"`
+	Locations    string   `json:"locations"`
+	ConcertDates string   `json:"concertDates"`
+	Relations    string   `json:"relations"`
 }
 
 type Location struct {
-	Index     int      `json: "index"`
-	Id        int      `json: "id"`
-	Locations []string `json: "locations"`
-	Dates     string   `json: "dates"`
+	Index     int      `json:"index"`
+	Id        int      `json:"id"`
+	Locations []string `json:"locations"`
+	Dates     string   `json:"dates"`
 }
 
 type Date struct {
-	Index     int      `json: "index"`
-	Id        int      `json: "id"`
-	Locations []string `json: "locations"`
+	Index     int      `json:"index"`
+	Id        int      `json:"id"`
+	Locations []string `json:"locations"`
 }
 
 type Relation struct {
-	Index          int                 `json: "index"`
-	Id             int                 `json: "id"`
-	DatesLocations map[string][]string `json: "datesLocations"`
+	Index          int                 `json:"index"`
+	Id             int                 `json:"id"`
+	DatesLocations map[string][]string `json:"datesLocations"`
 }
 
 type Data struct {
@@ -49,8 +50,10 @@ var (
 	artists   []Artist
 	locations []Location
 	dates     []Date
-	ralations []Relation
+	relations []Relation
 )
+
+var apiURL = "https://groupietrackers.herokuapp.com/api"
 
 func fetchData(url string, target interface{}) error {
 
@@ -68,4 +71,20 @@ func fetchData(url string, target interface{}) error {
 		return fmt.Errorf("Failed to read data: err")
 	}
 	return json.Unmarshal(data, &target)
+}
+
+func loadData() {
+	var err error
+	if err = fetchData(apiURL+"/artists", &artists); err != nil {
+		log.Fatalf("Error fetching artists: %s", err)
+	}
+	if err = fetchData(apiURL+"/locations", &locations); err != nil {
+		log.Fatalf("Error fetching locations: %s", err)
+	}
+	if err = fetchData(apiURL+"/dates", &dates); err != nil {
+		log.Fatalf("Error fetching dates: %s", err)
+	}
+	if err = fetchData(apiURL+"/relations", &relations); err != nil {
+		log.Fatalf("Error fetching artists: %s", err)
+	}
 }
