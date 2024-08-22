@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"groupie-tracker/internal/api"
 	"html/template"
 	"log"
 	"net/http"
@@ -13,6 +14,12 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	data, err := api.LoadData()
+	if err != nil {
+		http.Error(w, "Could not load API data: ", http.StatusInternalServerError)
+		log.Println("Error loading API data: ", err)
+	}
+
 	// Create Html template from home.html, handle errors if necessary
 	tmpl, err := template.ParseFiles("web/templates/home.html")
 
@@ -23,7 +30,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Safely execute tmpl, handle errors if necessary
-	err = tmpl.Execute(w, nil)
+	err = tmpl.Execute(w, data)
 	if err != nil {
 		http.Error(w, "Could not execute home template", http.StatusInternalServerError)
 		log.Println("Error executing template: ", err)
