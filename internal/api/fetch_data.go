@@ -1,4 +1,4 @@
-package internal
+package api
 
 import (
 	"encoding/json"
@@ -66,25 +66,33 @@ func fetchData(url string, target interface{}) error {
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("Failed to fetch data %s: %v", url, resp.Status)
 	}
-	data, err := io.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return fmt.Errorf("Failed to read data: err")
 	}
-	return json.Unmarshal(data, &target)
+	return json.Unmarshal(body, &target)
 }
 
-func loadData() {
+func LoadData() (Data, error) {
 	var err error
 	if err = fetchData(apiURL+"/artists", &artists); err != nil {
-		log.Fatalf("Error fetching artists: %s", err)
+		return Data{}, err
 	}
 	if err = fetchData(apiURL+"/locations", &locations); err != nil {
-		log.Fatalf("Error fetching locations: %s", err)
+		return Data{}, err
 	}
 	if err = fetchData(apiURL+"/dates", &dates); err != nil {
-		log.Fatalf("Error fetching dates: %s", err)
+		return Data{}, err
 	}
 	if err = fetchData(apiURL+"/relations", &relations); err != nil {
-		log.Fatalf("Error fetching artists: %s", err)
+		return Data{}, err
 	}
+
+	data := Data{
+		Artists: artists,
+		Locations: locations,
+		Dates: dates,
+		Relations: relations,
+	}
+	return data, nil
 }
