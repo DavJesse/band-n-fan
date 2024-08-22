@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
+    <title>artists</title>
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
     <div class="logo-container">        
             <img src="../static/images/logo.png" alt="logo">        
     </div>
-
+<h1>Artists</h1>
+<ul>
+    {{ range .Artists}}
+    <li>{{ .Name}}</li>
+    {{ end }}
+</ul>
    
 </body>
 </html>

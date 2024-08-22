@@ -88,5 +88,11 @@
             </div> 
         </div>
     </div>
+    <h1>Artists</h1>
+<ul>
+    {{ range .Artists}}
+    <li>{{ .Name}}</li>
+    {{ end }}
+</ul>
 </body>
 </html>
