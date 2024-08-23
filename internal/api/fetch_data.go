@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 )
 
@@ -68,7 +67,7 @@ func fetchData(url string, target interface{}) error {
 	}
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return fmt.Errorf("Failed to read data: err")
+		return fmt.Errorf("Failed to read data: %v", err)
 	}
 	return json.Unmarshal(body, &target)
 }
@@ -89,9 +88,9 @@ func LoadData() (Data, error) {
 	}
 
 	data := Data{
-		Artists: artists,
+		Artists:   artists,
 		Locations: locations,
-		Dates: dates,
+		Dates:     dates,
 		Relations: relations,
 	}
 	return data, nil
