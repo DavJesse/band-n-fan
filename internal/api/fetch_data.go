@@ -20,60 +20,83 @@ type Artist struct {
 }
 
 type Location struct {
-	Index     int      `json:"index"`
 	Id        int      `json:"id"`
 	Locations []string `json:"locations"`
 	Dates     string   `json:"dates"`
 }
 
+type LocationData struct {
+	Index []Location `json:"index"`
+}
+
 type Date struct {
-	Index     int      `json:"index"`
 	Id        int      `json:"id"`
 	Locations []string `json:"locations"`
 }
 
+type DateData struct {
+	Index []Date `json:"index"`
+}
+
 type Relation struct {
-	Index          int                 `json:"index"`
 	Id             int                 `json:"id"`
 	DatesLocations map[string][]string `json:"datesLocations"`
 }
 
+type RelationData struct {
+	Index []Relation `json:"index"`
+}
+
 type Data struct {
 	Artists   []Artist
-	Locations []Location
-	Dates     []Date
-	Relations []Relation
+	Locations LocationData
+	Dates     DateData
+	Relations RelationData
 }
 
 var (
 	artists   []Artist
-	locations []Location
-	dates     []Date
-	relations []Relation
+	locations LocationData
+	dates     DateData
+	relations RelationData
 )
 
 var apiURL = "https://groupietrackers.herokuapp.com/api"
 
+// fetchData is used to retrieve json data from a specified url...
+// ... and storing data in go data structures.
 func fetchData(url string, target interface{}) error {
 
+	// Retrieve http response from url containing json data
+	// Handle any errors encountered
+	// Close response body at the termination of function
 	resp, err := http.Get(url)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to fetch data from %s: %v", url, err)
 	}
 	defer resp.Body.Close()
 
+	// Confirm http status code 200, to ensure everything is in order
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("Failed to fetch data %s: %v", url, resp.Status)
+		return fmt.Errorf("failed to fetch data %s: %v", url, resp.Status)
 	}
+
+	// Read response body, storing it in 'body'
+	// Handle any errors encountered
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return fmt.Errorf("Failed to read data: %v", err)
+		return fmt.Errorf("failed to read data from %s: %v", url, err)
 	}
+
+	// Unmarshal json data in body, storing it in target
 	return json.Unmarshal(body, &target)
 }
 
+// LoadData leverages fetch data to populate Data object with data from api
 func LoadData() (Data, error) {
 	var err error
+
+	// Load data to 'ariststs', 'locations', 'dates', and 'relations'
 	if err = fetchData(apiURL+"/artists", &artists); err != nil {
 		return Data{}, err
 	}
@@ -83,10 +106,11 @@ func LoadData() (Data, error) {
 	if err = fetchData(apiURL+"/dates", &dates); err != nil {
 		return Data{}, err
 	}
-	if err = fetchData(apiURL+"/relations", &relations); err != nil {
+	if err = fetchData(apiURL+"/relation", &relations); err != nil {
 		return Data{}, err
 	}
 
+	// consolidate the loaded data in 'data' for easier retrieval in the future
 	data := Data{
 		Artists:   artists,
 		Locations: locations,
