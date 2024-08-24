@@ -63,11 +63,11 @@ func fetchData(url string, target interface{}) error {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("Failed to fetch data %s: %v", url, resp.Status)
+		return fmt.Errorf("failed to fetch data %s: %v", url, resp.Status)
 	}
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return fmt.Errorf("Failed to read data: %v", err)
+		return fmt.Errorf("failed to read data: %v", err)
 	}
 	return json.Unmarshal(body, &target)
 }
