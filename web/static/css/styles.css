@@ -1,8 +1,9 @@
 body {
     background-image: url('../images/background-1920x1201.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover; /* Fill screen(horizontally) with background*/
+    background-position: top; /*Position background image to the top */
+    background-repeat: no-repeat; /*Only have one itereation of background image*/
+    background-attachment: fixed; /*Fix background image despite scroll*/
     background-color: #020816; /* Use magenta background at the edge of background image */
 }
 
