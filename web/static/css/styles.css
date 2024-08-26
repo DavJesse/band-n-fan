@@ -93,6 +93,7 @@ p {
     height: 150px;
     bottom: -80px;
     background: #020816;
+    transform: scale(1.2);
 }
 
 .cards:hover p {
@@ -101,7 +102,7 @@ p {
 }
 
 .cards:hover img {
-    transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.2);
 }
 
 img {
