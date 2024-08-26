@@ -90,9 +90,10 @@ p {
 }
 
 .cards:hover .overview {
-    height: 150px;
-    bottom: -80px;
+    height: 200px;
+    bottom: auto;
     background: #020816;
+    transform: scale(1.2);
 }
 
 .cards:hover p {
@@ -101,7 +102,7 @@ p {
 }
 
 .cards:hover img {
-    transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.2);
 }
 
 img {
@@ -117,7 +118,7 @@ img {
     box-sizing: border-box;
     position: absolute;
     bottom: -80px;
-    background: rgb(27, 27, 27, .5);
+    background: rgba(25, 1, 65, 0.425);
     color: white;
     overflow: hidden;
     transition: .5s;
