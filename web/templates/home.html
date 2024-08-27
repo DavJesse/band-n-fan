@@ -88,20 +88,18 @@
             </div> 
         </div>
     </div>
-    <h1>Artists</h1>
-<ul>
+
+  <h1>Artists</h1>
     <div class="card-container">
-        {{ range .Artists}}
-        <li>{{ .Name}}</li>
+        {{ range .Artists }}
         <div class="cards">
-    <img src="{{.Image}}" alt="{{.Name}}">
-    <div class="overview">
-        <h1>{{.Name}}</h1>
-        <p>Creation Date: {{.CreationDate}}<br>First Album: {{.FirstAlbum}}</p>
+            <img src="{{.Image}}" alt="{{.Name}}">
+            <div class="overview">
+                <h1>{{ .Name }}</h1>
+                <p>Creation Date: {{ .CreationDate }}<br>First Album: {{ .FirstAlbum }}</p>
+            </div>
+        </div>
+        {{ end }}
     </div>
-    </div>
-    {{ end }}
-    </div>
-</ul>
 </body>
 </html>
