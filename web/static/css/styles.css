@@ -10,6 +10,8 @@ body {
 h1 {
     margin: 7px;
     font-size: 28px;
+    text-align: center;
+    color: #fff;
 }
 
 p {
@@ -56,12 +58,15 @@ p {
     height: 290px; /* Ensures full height utilization */
     background-color: #eee;
     position: relative;
+    overflow: hidden;
 }
 
 .img1 img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    min-height: 290px;
     object-fit: cover; /* Ensures the image covers the container fully */
+    object-position: center; /* Centers the image within the container */
 }
 
 *{
@@ -71,29 +76,50 @@ p {
 }
 
 .card-container {
-    display: flex;
-    height: 100vh;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    height: auto;
+    align-items: start;
     /* background: whitesmoke; */
 }
 
 .cards {
-    height: 250px;
-    width: 250px;
-    margin: 25px;
+    width: 100%;
+    margin: 0;
     box-shadow: 5px 5px 20px grey;
-    /* overflow: hidden; */
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.cards img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    transition: 0.3s ease;
+}
+
+.cards:hover img {
+    transform: scale(1.05);
 }
 
 .cards:hover {
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .cards:hover .overview {
-    height: 200px;
-    bottom: auto;
+    height: auto;
+    bottom: 0;
     background: #020816;
-    transform: scale(1.2);
+    transform: scale(1);
 }
 
 .cards:hover p {
@@ -106,18 +132,19 @@ p {
 }
 
 img {
-    height: 300px;
-    width: 250px;
+    height: 100%;
+    width: 100%;
     border-radius: 3px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 .overview {
-    height: 50px;
-    width: 250px;
-    padding: 6px;
+    width: 100%;
+    padding: 15px;
     box-sizing: border-box;
     position: absolute;
-    bottom: -80px;
+    bottom: -90px;
     background: rgba(25, 1, 65, 0.425);
     color: white;
     overflow: hidden;
@@ -132,13 +159,6 @@ img {
     100% {
         transform: translateX(-100%);
     }
-}
-
-.img1 a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-decoration: none; /* Removes underline from links */
 }
 
 @media (max-width: 768px) {
