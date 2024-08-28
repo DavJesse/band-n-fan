@@ -13,81 +13,13 @@
 
     <div class="container">
         <div class="marquee">
+            {{range .Artists}}
             <div class="img1">
-                <a href="https://example.com/link1" target="_blank">
-                    <img src="../static/images/cropped-1.jpg" alt="Image 1">
-                </a>
-                <a href="https://example.com/link1" target="_blank">
-                    <img src="../static/images/cropped-1.jpg" alt="Image 1">
-                </a>
+                <img src="{{.Image}}" alt="{{.Name}}">
             </div>
-            <div class="img1">
-                <a href="https://example.com/link2" target="_blank">
-                    <img src="../static/images/cropped-2.jpg" alt="Image 2">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link3" target="_blank">
-                    <img src="../static/images/cropped-2.jpg" alt="Image 2">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link2" target="_blank">
-                    <img src="../static/images/cropped-2.jpg" alt="Image 2">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link3" target="_blank">
-                    <img src="../static/images/cropped-3.jpg" alt="Image 3">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link4" target="_blank">
-                    <img src="../static/images/cropped-4.jpg" alt="Image 4">
-                </a>
-            </div> 
-            <div class="img1">
-                <a href="https://example.com/link1" target="_blank">
-                    <img src="../static/images/cropped-1.jpg" alt="Image 1">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link2" target="_blank">
-                    <img src="../static/images/cropped-2.jpg" alt="Image 2">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link3" target="_blank">
-                    <img src="../static/images/cropped-3.jpg" alt="Image 3">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link4" target="_blank">
-                    <img src="../static/images/cropped-4.jpg" alt="Image 4">
-                </a>
-            </div> 
-            <div class="img1">
-                <a href="https://example.com/link1" target="_blank">
-                    <img src="../static/images/cropped-1.jpg" alt="Image 1">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link2" target="_blank">
-                    <img src="../static/images/cropped-2.jpg" alt="Image 2">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link3" target="_blank">
-                    <img src="../static/images/cropped-3.jpg" alt="Image 3">
-                </a>
-            </div>
-            <div class="img1">
-                <a href="https://example.com/link4" target="_blank">
-                    <img src="../static/images/cropped-4.jpg" alt="Image 4">
-                </a>
-            </div> 
+            {{end}}
         </div>
-    </div>
+    </div>    
 
   <h1>Artists</h1>
     <div class="card-container">
