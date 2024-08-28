@@ -90,6 +90,7 @@ p {
     overflow: hidden;
     border-radius: 10px;
     transition: transform 0.3s ease;
+    position: relative;
 }
 
 .cards:hover {
@@ -122,7 +123,7 @@ img {
 }
 
 .overview {
-    /* height: 50px; */
+    height: auto;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
