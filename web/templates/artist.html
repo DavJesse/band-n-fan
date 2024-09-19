@@ -10,12 +10,16 @@
     <div class="logo-container">        
             <img src="../static/images/logo.png" alt="logo">        
     </div>
-<h1>Artists</h1>
-<ul>
-    {{ range .Artists}}
-    <li>{{ .Name}}</li>
-    {{ end }}
-</ul>
+    <div class="artist-details">
+    <h1>Artist.Name</h1>
+    <img src="{{ .Image }}" alt="{{ .Name }}">
+    <p>Creation Date: {{ .CreationDate }}</p>
+    <p>First Album: {{ .FirstAlbum }}</p>
+    <p>Members: {{range .Members }}{{.}}, {{end}}</p>
+    <p>Locations: {{ .Locations }}</p>
+    <p>Concert Dates: {{ .ConcertDates }}</p>
+    <p>Relations: {{ .Relations }}</p>
+</div>
    
 </body>
 </html>
