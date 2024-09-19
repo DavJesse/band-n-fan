@@ -15,8 +15,8 @@ func main() {
 	}
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("web/static")))) // Serve static files
-	http.HandleFunc("/", handlers.HomeHandler) // Serve home page
-	http HandleFunc("/artist.htm", handlers.ArtistHandler) // Serve artist.html
+	http.HandleFunc("/", handlers.HomeHandler)                                                     // Serve home page
+	http.HandleFunc("/artist.htm", handlers.ArtistHandler)                                         // Serve artist.html
 
 	// Start server
 	log.Println("Starting server on port 8080")
