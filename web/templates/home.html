@@ -29,7 +29,7 @@
             <div class="overview">
                 <h1>{{ .Name }}</h1>
                 <p>Creation Date: {{ .CreationDate }}<br>First Album: {{ .FirstAlbum }}</p>
-                <a ahref="artist.html?{{ .Id }}"></a>
+                <a href="/artist/?id={{ .Id }}">View Artist Details</a>
             </div>
         </div>
         {{ end }}
