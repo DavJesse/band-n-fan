@@ -21,6 +21,17 @@ p {
     opacity: 0;
 }
 
+.artist-details {
+    opacity: 1;
+}
+
+.artist-details p {
+    font-size: 20px;
+    margin: 20px;
+    color: #FFFFFF;
+    text-align: left;
+}
+
 .logo-container {
     position: absolute;
     left: 20px;
@@ -42,8 +53,8 @@ p {
 
 .marquee {
     display: flex;
-    position: relative;
-    width: 100%;
+    /* position: relative; */
+    width: 200%;
     height: 100%;
     animation: scroll 30s linear infinite;
 }
@@ -53,9 +64,10 @@ p {
 }
 
 .img1 {
+    flex: 0 0 150px;
     margin-right: 10px;
-    width: 150px;
-    height: 290px; /* Ensures full height utilization */
+    /* width: 150px; */
+    height: 290px;
     background-color: #eee;
     position: relative;
     overflow: hidden;
@@ -63,10 +75,10 @@ p {
 
 .img1 img {
     width: 100%;
-    height: auto;
-    min-height: 290px;
+    height: 100%;
     object-fit: cover; /* Ensures the image covers the container fully */
     object-position: center; /* Centers the image within the container */
+    /* transform: scale(1.2); Slightly scale the image to avoid slender strip */
 }
 
 *{
@@ -157,7 +169,7 @@ img {
     }
 
     100% {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
     }
 }
 
