@@ -21,6 +21,17 @@ p {
     opacity: 0;
 }
 
+.artist-details {
+    opacity: 1;
+}
+
+.artist-details p {
+    font-size: 20px;
+    margin: 20px;
+    color: #FFFFFF;
+    text-align: left;
+}
+
 .logo-container {
     position: absolute;
     left: 20px;
