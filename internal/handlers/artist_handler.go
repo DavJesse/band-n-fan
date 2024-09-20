@@ -17,13 +17,6 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Load data from API
-	//data, err := api.LoadData()
-	// if err != nil {
-	// 	http.Error(w, "Failed to load data", http.StatusInternalServerError)
-	// 	return
-	// }
-
 	// Parse 'id' query as parameter
 	idStr := r.URL.Query().Get("id")
 	if idStr == "" {
@@ -52,6 +45,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// Extract relation data for tour dates and locations
 	for _, relation := range data.Relations.Index {
 		if relation.Id == id {
 			selectedArtist.Relation = relation.DatesLocations
