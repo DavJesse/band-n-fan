@@ -11,10 +11,17 @@ h1 {
     margin: 7px;
     font-size: 28px;
     text-align: center;
-    color: #fff;
+    color: #FFFFFF;
 }
 
-p {
+.artist-details h2 {
+    font-size: 25px;
+    margin: 6px;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.overview p {
     font-size: 18px;
     margin: 20px;
     visibility: hidden;
@@ -25,7 +32,7 @@ p {
     opacity: 1;
 }
 
-.artist-details p {
+p {
     font-size: 20px;
     margin: 20px;
     color: #FFFFFF;

@@ -16,9 +16,16 @@
     <p>Creation Date: {{ .CreationDate }}</p>
     <p>First Album: {{ .FirstAlbum }}</p>
     <p>Members: {{range .Members }}{{.}}, {{end}}</p>
-    <p>Locations: {{ .Locations }}</p>
-    <p>Concert Dates: {{ .ConcertDates }}</p>
-    <p>Relations: {{ .Relations }}</p>
+    <h2>Concert Dates:</h2>
+    {{ range $key, $values := .Relation }}
+       <p>{{ $key }}:</p>
+        <ul>
+           {{ range $index, $value := $values }}
+            <li><p>{{ $value }}</p></li>
+            {{end}}
+        </ul>
+        {{ end }}
+    </p>
 </div>
    
 </body>

@@ -45,26 +45,44 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var selectedArtist api.Artist
-	var found bool
+	var foundArtist bool
+	var foundRelation bool
 
 	// Extract artist with matching id
 	for _, artist := range data.Artists {
 		if artist.Id == id {
+			log.Println("Artist from data.Artists")
+			log.Printf("%#v\n", artist)
 			selectedArtist = artist
-			found = true
+			foundArtist = true
 			break
 		}
 	}
 
-	if !found {
+	for _, relation := range data.Relations.Index {
+		if relation.Id == id {
+			selectedArtist.Relation = relation.DatesLocations
+			foundRelation = true
+			break
+		}
+	}
+	log.Printf("%#v\n", selectedArtist.Relation)
+	log.Printf("%T\n", selectedArtist.Relation)
+
+	if !foundArtist {
 		http.Error(w, "Artist not found", http.StatusNotFound)
+		log.Println("Artist index not found")
 		return
+	} else if !foundRelation {
+		http.Error(w, "Relation not found", http.StatusNotFound)
+		log.Println("Relation index not found")
 	}
 
 	// Render artist to html template
 	err = tmpl.Execute(w, selectedArtist)
 	if err != nil {
 		http.Error(w, "Failed to render template", http.StatusInternalServerError)
+		log.Println("Failed to load selected artist template", err)
 		return
 	}
 }
