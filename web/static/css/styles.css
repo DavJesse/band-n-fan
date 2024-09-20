@@ -14,12 +14,6 @@ body {
     padding-left: 15px;
 }
 
-.logo-container a {
-    font-size: 50px;
-    font-style: italic;
-    font-weight: 600;
-    color: #eee;
-}
 
 .nav-div {
     display: flex;
@@ -37,6 +31,13 @@ body {
     font-size: 20px;
     font-weight: bold;
     margin-right: 40px;
+}
+
+.logo-container a {
+    font-size: 50px;
+    font-style: italic;
+    font-weight: 600;
+    color: #eee;
 }
 
 h1 {
