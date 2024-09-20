@@ -79,14 +79,11 @@ p {
     overflow: hidden;
 }
 
-.img1 {
-    flex: 0 0 150px;
-    margin-right: 10px;
-    /* width: 150px; */
-    height: 290px;
-    background-color: #eee;
+.artist-details img {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
     position: relative;
-    overflow: hidden;
 }
 
 .img1 img {
