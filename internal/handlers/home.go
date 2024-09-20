@@ -7,6 +7,9 @@ import (
 	"net/http"
 )
 
+// Load data from API
+var data, err = api.LoadData()
+
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	// Restrict access to home page
 	if r.Method != "GET" {
@@ -14,8 +17,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Load data from API, handle errors if necessary
-	data, err := api.LoadData()
+	// handle errors from API call
 	if err != nil {
 		http.Error(w, "Could not load API data: ", http.StatusInternalServerError)
 		log.Println("Error loading API data: ", err)

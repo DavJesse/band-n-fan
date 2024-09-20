@@ -18,11 +18,11 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Load data from API
-	data, err := api.LoadData()
-	if err != nil {
-		http.Error(w, "Failed to load data", http.StatusInternalServerError)
-		return
-	}
+	//data, err := api.LoadData()
+	// if err != nil {
+	// 	http.Error(w, "Failed to load data", http.StatusInternalServerError)
+	// 	return
+	// }
 
 	// Parse 'id' query as parameter
 	idStr := r.URL.Query().Get("id")
