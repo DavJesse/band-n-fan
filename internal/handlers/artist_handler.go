@@ -52,7 +52,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	for _, artist := range data.Artists {
 		if artist.Id == id {
 			log.Println("Artist from data.Artists")
-			log.Printf("%#v\n",artist)
+			log.Printf("%#v\n", artist)
 			selectedArtist = artist
 			foundArtist = true
 			break

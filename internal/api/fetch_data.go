@@ -14,7 +14,7 @@ type Artist struct {
 	Members      []string `json:"members"`
 	CreationDate int      `json:"creationDate"`
 	FirstAlbum   string   `json:"firstAlbum"`
-	Relation    map[string][]string
+	Relation     map[string][]string
 }
 
 type Location struct {
