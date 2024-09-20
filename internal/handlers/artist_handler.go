@@ -10,11 +10,6 @@ import (
 )
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
-	// if r.method != post {
-	// 	http.Error(w, "Bad Request", http.StatusBadRequest)
-	// 	return
-	// }
-
 	tmpl, err := template.ParseFiles("web/templates/artist.html")
 	if err != nil {
 		http.Error(w, "Failed to load artist", http.StatusInternalServerError)
@@ -51,8 +46,6 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	// Extract artist with matching id
 	for _, artist := range data.Artists {
 		if artist.Id == id {
-			log.Println("Artist from data.Artists")
-			log.Printf("%#v\n", artist)
 			selectedArtist = artist
 			foundArtist = true
 			break
