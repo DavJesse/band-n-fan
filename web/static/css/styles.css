@@ -7,15 +7,18 @@ body {
     background-color: #020816; /* Use magenta background at the edge of background image */
 }
 
-*{
-    text-decoration: none;
-}
-
 .nav-bar {
     background: #810a8b;
     font-family: calibri;
     padding-right: 15px;
     padding-left: 15px;
+}
+
+.logo-container a {
+    font-size: 50px;
+    font-style: italic;
+    font-weight: 600;
+    color: #eee;
 }
 
 .nav-div {
@@ -31,9 +34,9 @@ body {
 
 .nav-bar a {
     color: #eee;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    margin-right: 25px;
+    margin-right: 40px;
 }
 
 h1 {
@@ -68,18 +71,6 @@ p {
     text-align: left;
 }
 
-.logo-container {
-    position: absolute;
-    left: 20px;
-    top: 20px;
-    text-decoration: none;
-    z-index: 10;
-}
-
-.logo-container img {
-    width: 120px;
-    height: auto;
-}
 
 .container {
     width: 100%;
@@ -109,6 +100,7 @@ p {
     margin: 0px;
     padding: 0px;
     font-family: sans-serif;
+    text-decoration: none;
 }
 
 .card-container {
