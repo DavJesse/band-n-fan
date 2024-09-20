@@ -66,8 +66,6 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 	}
-	log.Printf("%#v\n", selectedArtist.Relation)
-	log.Printf("%T\n", selectedArtist.Relation)
 
 	if !foundArtist {
 		http.Error(w, "Artist not found", http.StatusNotFound)
