@@ -7,14 +7,54 @@ body {
     background-color: #020816; /* Use magenta background at the edge of background image */
 }
 
+.nav-bar {
+    background: #810a8b;
+    font-family: calibri;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+.nav-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-bar li {
+    list-style: none;
+    display: inline-block;
+}
+
+.nav-bar a {
+    color: #eee;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 40px;
+}
+
+.logo-container a {
+    font-size: 50px;
+    font-style: italic;
+    font-weight: 600;
+    color: #eee;
+}
+
 h1 {
     margin: 7px;
     font-size: 28px;
     text-align: center;
-    color: #fff;
+    color: #FFFFFF;
 }
 
-p {
+.artist-details h2 {
+    font-size: 25px;
+    margin: 6px;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.overview p {
     font-size: 18px;
     margin: 20px;
     visibility: hidden;
@@ -25,25 +65,13 @@ p {
     opacity: 1;
 }
 
-.artist-details p {
+p {
     font-size: 20px;
     margin: 20px;
     color: #FFFFFF;
     text-align: left;
 }
 
-.logo-container {
-    position: absolute;
-    left: 20px;
-    top: 20px;
-    text-decoration: none;
-    z-index: 10;
-}
-
-.logo-container img {
-    width: 120px;
-    height: auto;
-}
 
 .container {
     width: 100%;
@@ -51,40 +79,18 @@ p {
     overflow: hidden;
 }
 
-.marquee {
-    display: flex;
-    /* position: relative; */
-    width: 200%;
-    height: 100%;
-    animation: scroll 30s linear infinite;
-}
-
-.marquee:hover {
-    animation-play-state: paused;
-}
-
-.img1 {
-    flex: 0 0 150px;
-    margin-right: 10px;
-    /* width: 150px; */
-    height: 290px;
-    background-color: #eee;
+.artist-details img {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
     position: relative;
-    overflow: hidden;
-}
-
-.img1 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the container fully */
-    object-position: center; /* Centers the image within the container */
-    /* transform: scale(1.2); Slightly scale the image to avoid slender strip */
 }
 
 *{
     margin: 0px;
     padding: 0px;
     font-family: sans-serif;
+    text-decoration: none;
 }
 
 .card-container {
