@@ -24,6 +24,18 @@ body {
     justify-content: space-between;
 }
 
+.nav-bar li {
+    list-style: none;
+    display: inline-block;
+}
+
+.nav-bar a {
+    color: #eee;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 25px;
+}
+
 h1 {
     margin: 7px;
     font-size: 28px;
