@@ -14,6 +14,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Load data from API, handle errors if necessary
 	data, err := api.LoadData()
 	if err != nil {
 		http.Error(w, "Could not load API data: ", http.StatusInternalServerError)
