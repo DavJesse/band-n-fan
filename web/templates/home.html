@@ -7,19 +7,20 @@
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-    <div class="logo-container">        
-            <img src="../static/images/logo.png" alt="logo">        
-    </div>
-
-    <div class="container">
-        <div class="marquee">
-            {{range .Artists}}
-            <div class="img1">
-                <img src="{{.Image}}" alt="{{.Name}}">
+    
+    <nav class="nav-bar">
+        <div class="nav-div">
+            <div class="logo-container">
+                <a href="#"><img src="../static/images/logo.png" alt="logo"></a>     
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="/locations">Locations</a></li>
+                    <li><a href="/dates">Dates</a></li>
+                </ul>
             </div>
-            {{end}}
+            
         </div>
-    </div>    
+    </nav>   
 
   <h1>Artists</h1>
     <div class="card-container">
