@@ -9,7 +9,7 @@ import (
 func LocationsHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("web/templates/location.html")
 	if err != nil {
-		http.Error(w, "Failed to load template", http.StatusInternalServerError)
+		internalServerErrorHandler(w)
 		log.Println("Failed to load template: ", err)
 		return
 	}
@@ -26,9 +26,10 @@ func LocationsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// Execute locations template
 	err = tmpl.Execute(w, data.Locations)
 	if err != nil {
-		http.Error(w, "Failed to execute template", http.StatusInternalServerError)
+		internalServerErrorHandler(w)
 		log.Println("Failed to execute template", err)
 		return
 	}
