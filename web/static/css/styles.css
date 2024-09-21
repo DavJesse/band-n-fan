@@ -72,6 +72,11 @@ p {
     text-align: left;
 }
 
+.artist-header p {
+    font-size: 22px;
+    font-style: italic;
+    color:#f7b8fd;
+}
 
 .container {
     width: 100%;

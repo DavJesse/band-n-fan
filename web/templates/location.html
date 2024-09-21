@@ -7,10 +7,32 @@
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-    <div class="logo-container">        
-            <img src="../static/images/logo.png" alt="logo">        
-    </div>
+    <h1>Featured Locations</h1>
+    
+    <nav class="nav-bar">
+        <div class="nav-div">
+            <div class="logo-container"><a href="/">GroupieTracker</a></div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Locations</a></li>
+                <li><a href="/dates">Dates</a></li>
+            </ul>            
+        </div>
+    </nav> 
 
+    {{ range $objIndex, $objValue := .Index }}
+    <ul>
+        <div class="artist-header">
+            <li><p><strong>{{$objValue.BandName}} Tour Locations: </strong></p></li>
+        </div>
+        {{ range $index, $value := $objValue.Locations }}
+        <ul>
+            <li><p>{{ $value }}</p></li>
+        </ul>
+        {{ end }}
+        <br>
+    </ul>
+   {{ end }}
    
 </body>
 </html>

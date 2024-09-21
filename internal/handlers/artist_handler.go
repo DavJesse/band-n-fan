@@ -12,15 +12,15 @@ import (
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("web/templates/artist.html")
 	if err != nil {
-		http.Error(w, "Failed to load artist", http.StatusInternalServerError)
-		log.Println("Error loading template: ", err)
+		internalServerErrorHandler(w)
+		log.Println("Failed to load artist template", err)
 		return
 	}
 
 	// Parse 'id' query as parameter
 	idStr := r.URL.Query().Get("id")
 	if idStr == "" {
-		http.Error(w, "Artist ID missing", http.StatusBadRequest)
+		badRequestHandler(w)
 		log.Println("Error finding Artist ID")
 		return
 	}
@@ -28,7 +28,8 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	// Convert 'idStr' to int for practical use
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		http.Error(w, "Invalid artist ID", http.StatusBadRequest)
+		badRequestHandler(w)
+		log.Println("Invalid artist ID request")
 		return
 	}
 
@@ -54,19 +55,20 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// Handle error when client request is not found
 	if !foundArtist {
-		http.Error(w, "Artist not found", http.StatusNotFound)
+		notFoundHandler(w)
 		log.Println("Artist index not found")
 		return
 	} else if !foundRelation {
-		http.Error(w, "Relation not found", http.StatusNotFound)
+		notFoundHandler(w)
 		log.Println("Relation index not found")
 	}
 
 	// Render artist to html template
 	err = tmpl.Execute(w, selectedArtist)
 	if err != nil {
-		http.Error(w, "Failed to render template", http.StatusInternalServerError)
+		internalServerErrorHandler(w)
 		log.Println("Failed to load selected artist template", err)
 		return
 	}
