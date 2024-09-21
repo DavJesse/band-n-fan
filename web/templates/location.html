@@ -22,7 +22,9 @@
 
     {{ range $objIndex, $objValue := .Index }}
     <ul>
-        <li><p>{{$objValue.BandName}} Tour Locations: </p></li>
+        <div class="artist-header">
+            <li><p><strong>{{$objValue.BandName}} Tour Locations: </strong></p></li>
+        </div>
         {{ range $index, $value := $objValue.Locations }}
         <ul>
             <li><p>{{ $value }}</p></li>
