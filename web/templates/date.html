@@ -21,14 +21,14 @@
     </nav> 
 
     {{ range $objIndex, $objValue := .Index }}
-    {{ range $key, $mapValue := $objValue.Dates }}
     <ul>
-        <h2>Date: {{obj.Id}}</h2>
-        {{ range $slcIndex, $date := $mapValue }}
+        <li><h2>Date: {{ .Index.Id }}</h2></li>
+        {{ range $index, $value := $objValue.Dates }}
         <ul>
-            <li><p>{{ $date}}</p></li>
+            <li><p>{{ $value}}</p></li>
         </ul>
+        {{ end }}
     </ul>
-   
+   {{ end }}
 </body>
 </html>
