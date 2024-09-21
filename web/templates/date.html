@@ -20,7 +20,15 @@
         </div>
     </nav> 
 
-   
+    {{ range $objIndex, $objValue := .Index }}
+    {{ range $key, $mapValue := $objValue.Dates }}
+    <ul>
+        <h2>Date: {{obj.Id}}</h2>
+        {{ range $slcIndex, $date := $mapValue }}
+        <ul>
+            <li><p>{{ $date}}</p></li>
+        </ul>
+    </ul>
    
 </body>
 </html>
