@@ -9,7 +9,7 @@ import (
 func DateHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("web/templates/date.html")
 	if err != nil {
-		http.Error(w, "Failed to load template", http.StatusInternalServerError)
+		internalServerErrorHandler(w)
 		log.Println("Failed to load template: ", err)
 		return
 	}
@@ -26,9 +26,10 @@ func DateHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// Execute dates template, handle errors if found
 	err = tmpl.Execute(w, data.Dates)
 	if err != nil {
-		http.Error(w, "Failed to execute template", http.StatusInternalServerError)
+		internalServerErrorHandler(w)
 		log.Println("Failed to execute template", err)
 		return
 	}
