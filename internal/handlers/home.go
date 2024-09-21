@@ -3,7 +3,6 @@ package handlers
 import (
 	"groupie-tracker/internal/api"
 	"html/template"
-	"log"
 	"net/http"
 )
 
