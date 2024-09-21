@@ -22,7 +22,7 @@
 
     {{ range $objIndex, $objValue := .Index }}
     <ul>
-        <li><p>Dates: {{$objValue.Id}}</p></li>
+        <li><p>{{$objValue.BandName}} Tour Dates: </p></li>
         {{ range $index, $value := $objValue.Dates }}
         <ul>
             <li><p>{{ $value}}</p></li>
