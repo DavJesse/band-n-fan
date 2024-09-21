@@ -3,14 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
+    <title>Date</title>
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-    <div class="logo-container">        
-            <img src="../static/images/logo.png" alt="logo">        
-    </div>
+    <h1>Featured Dates</h1>
+    
+    <nav class="nav-bar">
+        <div class="nav-div">
+            <div class="logo-container"><a href="/">GroupieTracker</a></div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/locations">Locations</a></li>
+                <li><a href="#">Dates</a></li>
+            </ul>            
+        </div>
+    </nav> 
 
-   
+    {{ range $objIndex, $objValue := .Index }}
+    <ul>
+        <li><p>Dates: {{$objValue.Id}}</p></li>
+        {{ range $index, $value := $objValue.Dates }}
+        <ul>
+            <li><p>{{ $value}}</p></li>
+        </ul>
+        {{ end }}
+        <br>
+    </ul>
+   {{ end }}
 </body>
 </html>

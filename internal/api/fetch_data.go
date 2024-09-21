@@ -28,8 +28,8 @@ type LocationData struct {
 }
 
 type Date struct {
-	Id        int      `json:"id"`
-	Locations []string `json:"locations"`
+	Id    int      `json:"id"`
+	Dates []string `json:"dates"`
 }
 
 type DateData struct {
