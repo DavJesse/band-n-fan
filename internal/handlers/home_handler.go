@@ -3,6 +3,7 @@ package handlers
 import (
 	"groupie-tracker/internal/api"
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -19,12 +20,14 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	// Restrict access to home page, execute error template
 	if r.Method != "GET" {
 		badRequestHandler(w)
+		log.Println("Bad client request: not GET")
 		return
 	}
 
 	// handle errors from API call
 	if err != nil {
 		internalServerErrorHandler(w)
+		log.Println("Could not load API data")
 		return
 	}
 
@@ -32,6 +35,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, err = template.ParseFiles("web/templates/home.html")
 	if err != nil {
 		internalServerErrorHandler(w)
+		log.Println("Failed to load home template")
 		return
 	}
 
@@ -39,6 +43,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	err = tmpl.Execute(w, data)
 	if err != nil {
 		internalServerErrorHandler(w)
+		log.Println("Failed to execute home template")
 		return
 	}
 }
