@@ -25,3 +25,23 @@ func badRequestHandler(w http.ResponseWriter) {
 		log.Println("Error executing template: ", err)
 	}
 }
+
+func internalServerErrorHandler(w http.ResponseWriter) {
+	tmpl, err = template.ParseFiles("web/templates/error.html")
+
+		// Use writer to render error if error page unavailable
+		if err != nil {
+			http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
+			return
+		}
+
+		hitch.StatusCode = http.StatusInternalServerError
+		hitch.Problem = "Internal Server Error!"
+
+		// Render template in html
+		err = tmpl.Execute(w, hitch)
+		if err != nil {
+			http.Error(w, "Could not execute error template, error page unavailable", http.StatusInternalServerError)
+			log.Println("Error executing template: ", err)
+		}
+}
