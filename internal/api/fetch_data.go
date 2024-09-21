@@ -28,8 +28,9 @@ type LocationData struct {
 }
 
 type Date struct {
-	Id    int      `json:"id"`
-	Dates []string `json:"dates"`
+	Id       int      `json:"id"`
+	Dates    []string `json:"dates"`
+	BandName string
 }
 
 type DateData struct {
