@@ -7,12 +7,21 @@ import (
 	"net/http"
 )
 
-// Load data from API
-var data, err = api.LoadData()
+var data, err = api.LoadData() // Load data from API
+var tmpl *template.Template
+
+type Issue struct {
+	StatusCode int
+	Problem    string
+}
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	// Restrict access to home page
 	if r.Method != "GET" {
+		tmpl, err = template.ParseFiles("web/templates/error.html")
+		Issue.StatusCode = http.StatusBadRequest
+
+		tmpl.Execute()
 		http.Error(w, "Bad Request", http.StatusBadRequest)
 		return
 	}
@@ -24,7 +33,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Create Html template from home.html, handle errors if necessary
-	tmpl, err := template.ParseFiles("web/templates/home.html")
+	tmpl, err = template.ParseFiles("web/templates/home.html")
 
 	if err != nil {
 		http.Error(w, "Could not load home template", http.StatusInternalServerError)
