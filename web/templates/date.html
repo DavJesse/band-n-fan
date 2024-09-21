@@ -22,12 +22,13 @@
 
     {{ range $objIndex, $objValue := .Index }}
     <ul>
-        <li><h2>Date: {{ .Index.Id }}</h2></li>
+        <li><p>Dates: {{$objValue.Id}}</p></li>
         {{ range $index, $value := $objValue.Dates }}
         <ul>
             <li><p>{{ $value}}</p></li>
         </ul>
         {{ end }}
+        <br>
     </ul>
    {{ end }}
 </body>
