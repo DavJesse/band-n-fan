@@ -47,6 +47,16 @@ h1 {
     color: #FFFFFF;
 }
 
+h2 {
+    margin: 6px;
+    font-size: 26px;
+    color: #FFFFFF;
+}
+
+section {
+    align: center;
+}
+
 .artist-details h2 {
     font-size: 25px;
     margin: 6px;
