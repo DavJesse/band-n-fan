@@ -24,7 +24,7 @@
         {{ range $objIndex, $objValue := .Index }}
         <div class="artist-item">
             <div class="artist-header">
-                <h2>{{$objValue.BandName}} Tour Dates: </h2>
+                <h2><a href="/artist/?id={{$objValue.Id}}">{{$objValue.BandName}}</a> Tour Dates: </h2>
             </div>
             <ul>
                 {{ range $index, $value := $objValue.Dates }}
