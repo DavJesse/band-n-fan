@@ -10,6 +10,13 @@ import (
 )
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
+	// Restrict access to artist page, execute error template
+	if r.Method != "GET" && r.Method != "POST" {
+		badRequestHandler(w)
+		log.Println("Bad client request: not GET or POST")
+		return
+	}
+
 	tmpl, err := template.ParseFiles("web/templates/artist.html")
 	if err != nil {
 		internalServerErrorHandler(w)
