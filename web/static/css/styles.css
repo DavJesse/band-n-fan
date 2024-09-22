@@ -43,7 +43,7 @@ body {
 h1 {
     margin: 17px;
     font-size: 28px;
-    text-align: center;
+    /* text-align: center; */
     color: #FFFFFF;
 }
 
@@ -139,6 +139,52 @@ section {
     opacity: 1;
 }
 
+.artist-bio {
+    border: none;
+    background-color: rgba(2, 8, 22, 0.8);
+    max-width: none;
+    width: calc(100% + 40);
+    position: relative;
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    left: -20px;
+    transform: none;
+    padding-left:  20px;
+    padding-right: 20;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.artist-bio .image-container {
+    flex: 0 0 auto;
+    margin-right: 20px;
+}
+
+.artist-bio .image-container img {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+}
+
+.artist-bio .text-container {
+    flex: 1 1 auto;
+}
+
+.artist-bio .text-container p {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #FFFFFF;
+    text-align: left;
+}
+
+.artist-bio .text-container h1 {
+    text-align: none;
+}
+
 p {
     font-size: 20px;
     margin: 20px;
@@ -156,13 +202,6 @@ p {
     width: 100%;
     height: 290px;
     overflow: hidden;
-}
-
-.artist-details img {
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    position: relative;
 }
 
 *{
