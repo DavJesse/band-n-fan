@@ -66,6 +66,14 @@ section {
     transform: translate(-50%, -50%);
 }
 
+.back {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .artist-details h2 {
     font-size: 25px;
     margin: 6px;
