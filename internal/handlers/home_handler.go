@@ -7,20 +7,19 @@ import (
 	"net/http"
 )
 
-type Issue struct {
-	StatusCode int
-	Problem    string
-}
-
 var data, err = api.LoadData() // Load data from API
-var tmpl *template.Template
-var hitch Issue
+var tmpl *template.Template    // Initialize variable to hold our html templates
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	// Restrict access to home page, execute error template
-	if r.Method != "GET" {
+	if r.Method != "GET" || r.URL.Path != "/" {
 		badRequestHandler(w)
-		log.Println("Bad client request: not GET")
+
+		if r.Method != "GET" {
+			log.Println("Bad client request: not GET")
+		} else {
+			log.Println("Invalid client path")
+		}
 		return
 	}
 

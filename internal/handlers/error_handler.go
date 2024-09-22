@@ -6,6 +6,14 @@ import (
 	"net/http"
 )
 
+type Issue struct {
+	StatusCode int
+	Problem    string
+}
+
+// Initialize variable to hold error message and status codes
+var hitch Issue
+
 func badRequestHandler(w http.ResponseWriter) {
 	tmpl, err = template.ParseFiles("web/templates/error.html")
 

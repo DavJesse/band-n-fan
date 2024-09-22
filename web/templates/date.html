@@ -18,22 +18,22 @@
                 <li><a href="#">Dates</a></li>
             </ul>            
         </div>
-    </nav> 
+    </nav>
 
-    {{ range $objIndex, $objValue := .Index }}
-    <ul>
-        <div class="artist-header">
-            <li><p>{{$objValue.BandName}} Tour Dates: </p></li>
-        </div>
-
-        {{ range $index, $value := $objValue.Dates }}
-        <ul>
-            <li><p>{{ $value}}</p></li>
-        </ul>
-        {{ end }}
-        <br>
-    </ul>
-   {{ end }}
+    <div class="item-grid">
+        {{ range $objIndex, $objValue := .Index }}
+        <div class="artist-item">
+            <div class="artist-header">
+                <h2><a href="/artist/?id={{$objValue.Id}}">{{$objValue.BandName}}</a> Tour Dates: </h2>
+            </div>
+            <ul>
+                {{ range $index, $value := $objValue.Dates }}
+                <li>{{ $value}}</li>
+                {{ end }}
+            </ul>
+        </div>      
+       {{ end }}
+    </div>
 
 </body>
 </html>

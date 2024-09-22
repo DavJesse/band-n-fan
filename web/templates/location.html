@@ -20,19 +20,20 @@
         </div>
     </nav> 
 
-    {{ range $objIndex, $objValue := .Index }}
-    <ul>
-        <div class="artist-header">
-            <li><p><strong>{{$objValue.BandName}} Tour Locations: </strong></p></li>
+    <div class="item-grid">
+        {{ range $objIndex, $objValue := .Index }}
+        <div class="artist-item">
+            <div class="artist-header">
+                <h2><a href="/artist/?id={{$objValue.Id}}">{{$objValue.BandName}}</a> Tour Locations: </h2>
+            </div>
+            <ul>
+                    {{ range $index, $value := $objValue.Locations }}
+                    <li>{{ $value }}</li>
+                    {{ end }}
+                </ul>
         </div>
-        {{ range $index, $value := $objValue.Locations }}
-        <ul>
-            <li><p>{{ $value }}</p></li>
-        </ul>
-        {{ end }}
-        <br>
-    </ul>
-   {{ end }}
+       {{ end }}
+    </div>
    
 </body>
 </html>
