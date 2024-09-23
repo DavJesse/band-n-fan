@@ -1,35 +1,62 @@
 package handlers
 
 import (
+	"errors"
 	"html/template"
 	"log"
 	"net/http"
 )
 
+var (
+	relationTemplate         *template.Template
+	mockRelationTemplate     string
+	mockRelationTemplateError bool
+)
+
+func SetMockRelationTemplate(content string) {
+	mockRelationTemplate = content
+}
+
+func SetMockRelationTemplateError(shouldError bool) {
+	mockRelationTemplateError = shouldError
+}
+
+func loadRelationTemplate() error {
+	if mockRelationTemplateError {
+		return errors.New("mock relation template loading error")
+	}
+	if mockRelationTemplate != "" {
+		var err error
+		relationTemplate, err = template.New("relation").Parse(mockRelationTemplate)
+		return err
+	}
+	var err error
+	relationTemplate, err = template.ParseFiles("web/templates/relation.html")
+	return err
+}
+
 func RelationsHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err = template.ParseFiles("web/templates/relation.html")
-	if err != nil {
+	if err := loadRelationTemplate(); err != nil {
 		internalServerErrorHandler(w)
-		log.Println("Failed to load template: ", err)
+		log.Println("Failed to load relation template:", err)
 		return
 	}
 
 	// Populate BandName field of Relations struct
 	for i := range data.Relations.Index {
-		for j := i; j < len(data.Artists); j++ {
-			// if data.Relations.Index.Id and data.Artist.Id match, update BandName in dates.Index[i]
+		for j := range data.Artists {
 			if data.Artists[j].Id == data.Relations.Index[i].Id {
 				data.Relations.Index[i].BandName = data.Artists[j].Name
-				i++ // Break loop, match found
+				break // Break loop when match is found
 			}
 		}
 	}
 
-	// Execute locations template
-	err = tmpl.Execute(w, data.Relations)
+	// Execute relations template
+	err := relationTemplate.Execute(w, data.Relations)
 	if err != nil {
 		internalServerErrorHandler(w)
-		log.Println("Failed to execute template", err)
+		log.Println("Failed to execute template:", err)
 		return
 	}
 }

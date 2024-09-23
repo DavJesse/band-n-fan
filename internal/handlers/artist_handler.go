@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"errors"
 	"html/template"
 	"log"
 	"net/http"
@@ -8,23 +9,48 @@ import (
 
 	"groupie-tracker/internal/api"
 )
+var (
+	artistTemplate *template.Template
+	mockArtistTemplate string
+	mockArtistTemplateError bool
+)
+
+func SetMockArtistTemplate(content string) {
+	mockArtistTemplate = content
+}
+
+func SetMockArtistTemplateError(shouldError bool) {
+	mockArtistTemplateError = shouldError
+}
+
+func loadArtistTemplate() error {
+	if mockArtistTemplateError {
+		return errors.New("mock artist template loading error")
+	}
+	if mockArtistTemplate != "" {
+		var err error
+		artistTemplate, err = template.New("artist").Parse(mockArtistTemplate)
+		return err
+	}
+	var err error
+	artistTemplate, err = template.ParseFiles("web/templates/artist.html")
+	return err
+}
+
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
-	// Restrict access to artist page, execute error template
 	if r.Method != "GET" && r.Method != "POST" {
 		badRequestHandler(w)
 		log.Println("Bad client request: not GET or POST")
 		return
 	}
 
-	tmpl, err := template.ParseFiles("web/templates/artist.html")
-	if err != nil {
+	if err := loadArtistTemplate(); err != nil {
 		internalServerErrorHandler(w)
 		log.Println("Failed to load artist template", err)
 		return
 	}
 
-	// Parse 'id' query as parameter
 	idStr := r.URL.Query().Get("id")
 	if idStr == "" {
 		badRequestHandler(w)
@@ -32,7 +58,6 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Convert 'idStr' to int for practical use
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		badRequestHandler(w)
@@ -41,10 +66,8 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var selectedArtist api.Artist
-	var foundArtist bool
-	var foundRelation bool
+	var foundArtist, foundRelation bool
 
-	// Extract artist with matching id
 	for _, artist := range data.Artists {
 		if artist.Id == id {
 			selectedArtist = artist
@@ -53,7 +76,6 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Extract relation data for tour dates and locations
 	for _, relation := range data.Relations.Index {
 		if relation.Id == id {
 			selectedArtist.Relation = relation.DatesLocations
@@ -62,7 +84,6 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Handle error when client request is not found
 	if !foundArtist {
 		notFoundHandler(w)
 		log.Println("Artist index not found")
@@ -72,8 +93,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("Relation index not found")
 	}
 
-	// Render artist to html template
-	err = tmpl.Execute(w, selectedArtist)
+	err = artistTemplate.Execute(w, selectedArtist)
 	if err != nil {
 		internalServerErrorHandler(w)
 		log.Println("Failed to load selected artist template", err)
