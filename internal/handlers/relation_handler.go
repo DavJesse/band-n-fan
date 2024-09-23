@@ -14,10 +14,10 @@ func RelationsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Populate BandName field of Dates struct
+	// Populate BandName field of Relations struct
 	for i := range data.Relations.Index {
 		for j := i; j < len(data.Artists); j++ {
-			// if data.Dates.Index.Id and data.Artist.Id match, update BandName in dates.Index[i]
+			// if data.Relations.Index.Id and data.Artist.Id match, update BandName in dates.Index[i]
 			if data.Artists[j].Id == data.Relations.Index[i].Id {
 				data.Relations.Index[i].BandName = data.Artists[j].Name
 				i++ // Break loop, match found
