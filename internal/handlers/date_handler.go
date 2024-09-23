@@ -7,7 +7,7 @@ import (
 )
 
 func DateHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("web/templates/date.html")
+	tmpl, err = template.ParseFiles("web/templates/date.html")
 	if err != nil {
 		internalServerErrorHandler(w)
 		log.Println("Failed to load template: ", err)

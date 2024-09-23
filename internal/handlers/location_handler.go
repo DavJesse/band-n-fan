@@ -7,7 +7,7 @@ import (
 )
 
 func LocationsHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("web/templates/location.html")
+	tmpl, err = template.ParseFiles("web/templates/location.html")
 	if err != nil {
 		internalServerErrorHandler(w)
 		log.Println("Failed to load template: ", err)
