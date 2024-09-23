@@ -19,6 +19,7 @@ func main() {
 	http.HandleFunc("/artist/", handlers.ArtistHandler)                                            // Serve artist.html
 	http.HandleFunc("/dates", handlers.DateHandler)                                                //Serve date.html
 	http.HandleFunc("/locations", handlers.LocationsHandler)                                       // Serve location.html
+	http.HandleFunc("/relations", handlers.RelationsHandler)                                       // Serve relation.html
 
 	// Start server
 	log.Println("Starting server on port 8080")
