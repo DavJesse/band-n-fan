@@ -14,12 +14,6 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	// Restrict access to home page, execute error template
 	if r.Method != "GET" || r.URL.Path != "/" {
 		badRequestHandler(w)
-
-		if r.Method != "GET" {
-			log.Println("Bad client request: not GET")
-		} else {
-			log.Println("Invalid client path")
-		}
 		return
 	}
 

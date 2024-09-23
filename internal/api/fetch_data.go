@@ -40,6 +40,7 @@ type DateData struct {
 type Relation struct {
 	Id             int                 `json:"id"`
 	DatesLocations map[string][]string `json:"datesLocations"`
+	BandName       string
 }
 
 type RelationData struct {
