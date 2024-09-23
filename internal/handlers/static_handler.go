@@ -11,7 +11,7 @@ func StaticHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	filePath := "." + r.URL.Path
+	filePath := "./web" + r.URL.Path
 	fileInfo, err := os.Stat(filePath)
 	if err != nil {
 		notFoundHandler(w)
@@ -22,5 +22,6 @@ func StaticHandler(w http.ResponseWriter, r *http.Request) {
 		notFoundHandler(w)
 		return
 	}
+
 	http.ServeFile(w, r, filePath)
 }
