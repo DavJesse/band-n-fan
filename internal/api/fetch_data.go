@@ -14,15 +14,13 @@ type Artist struct {
 	Members      []string `json:"members"`
 	CreationDate int      `json:"creationDate"`
 	FirstAlbum   string   `json:"firstAlbum"`
-	Locations    string   `json:"locations"`
-	ConcertDates string   `json:"concertDates"`
-	Relations    string   `json:"relations"`
+	Relation     map[string][]string
 }
 
 type Location struct {
 	Id        int      `json:"id"`
 	Locations []string `json:"locations"`
-	Dates     string   `json:"dates"`
+	BandName  string
 }
 
 type LocationData struct {
@@ -30,8 +28,9 @@ type LocationData struct {
 }
 
 type Date struct {
-	Id        int      `json:"id"`
-	Locations []string `json:"locations"`
+	Id       int      `json:"id"`
+	Dates    []string `json:"dates"`
+	BandName string
 }
 
 type DateData struct {

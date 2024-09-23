@@ -3,14 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
+    <title>Date</title>
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-    <div class="logo-container">        
-            <img src="../static/images/logo.png" alt="logo">        
+    <h1>Featured Dates</h1>
+    
+    <nav class="nav-bar">
+        <div class="nav-div">
+            <div class="logo-container"><a href="/">GroupieTracker</a></div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/locations">Locations</a></li>
+                <li><a href="#">Dates</a></li>
+            </ul>            
+        </div>
+    </nav>
+
+    <div class="item-grid">
+        {{ range $objIndex, $objValue := .Index }}
+        <div class="artist-item">
+            <div class="artist-header">
+                <h2><a href="/artist/?id={{$objValue.Id}}">{{$objValue.BandName}}</a> Tour Dates: </h2>
+            </div>
+            <ul>
+                {{ range $index, $value := $objValue.Dates }}
+                <li>{{ $value}}</li>
+                {{ end }}
+            </ul>
+        </div>      
+       {{ end }}
     </div>
 
-   
 </body>
 </html>

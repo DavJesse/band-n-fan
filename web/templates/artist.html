@@ -7,15 +7,39 @@
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-    <div class="logo-container">        
-            <img src="../static/images/logo.png" alt="logo">        
-    </div>
-<h1>Artists</h1>
-<ul>
-    {{ range .Artists}}
-    <li>{{ .Name}}</li>
-    {{ end }}
-</ul>
+    <nav class="nav-bar">
+        <div class="nav-div">
+            <div class="logo-container"><a href="/">GroupieTracker</a></div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/locations">Locations</a></li>
+                <li><a href="/dates">Dates</a></li>
+            </ul>            
+        </div>
+    </nav>
+
+    <section class="artist-bio">
+        <div class="image-container"><img src="{{ .Image }}" alt="{{ .Name }}"></div>
+        <div class="text-contaier">
+            <h1>{{.Name}} Bio</h1>
+            <p>Creation Date: {{ .CreationDate }}</p>
+            <p>First Album: {{ .FirstAlbum }}</p>
+            <p>Members: {{range .Members }}{{.}}, {{end}}</p>
+        </div>
+    </section>
+
+    <div class="artist-details">
+    <h2>Concert Dates:</h2>
+    {{ range $key, $values := .Relation }}
+       <p>{{ $key }}:</p>
+        <ul>
+           {{ range $index, $value := $values }}
+            <li><p>{{ $value }}</p></li>
+            {{end}}
+        </ul>
+        {{ end }}
+    </p>
+</div>
    
 </body>
 </html>
