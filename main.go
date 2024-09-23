@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"groupie-tracker/internal/handlers"
 	"log"
 	"net/http"
 	"os"
+
+	"groupie-tracker/internal/handlers"
 )
 
 func main() {
@@ -14,12 +15,12 @@ func main() {
 		return
 	}
 
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("web/static")))) // Serve static files
-	http.HandleFunc("/", handlers.HomeHandler)                                                     // Serve home page
-	http.HandleFunc("/artist/", handlers.ArtistHandler)                                            // Serve artist.html
-	http.HandleFunc("/dates", handlers.DateHandler)                                                //Serve date.html
-	http.HandleFunc("/locations", handlers.LocationsHandler)                                       // Serve location.html
-	http.HandleFunc("/relations", handlers.RelationsHandler)                                       // Serve relation.html
+	http.HandleFunc("/static/", handlers.StaticHandler)
+	http.HandleFunc("/", handlers.HomeHandler)               // Serve home page
+	http.HandleFunc("/artist/", handlers.ArtistHandler)      // Serve artist.html
+	http.HandleFunc("/dates", handlers.DateHandler)          // Serve date.html
+	http.HandleFunc("/locations", handlers.LocationsHandler) // Serve location.html
+	http.HandleFunc("/relations", handlers.RelationsHandler) // Serve relation.html
 
 	// Start server
 	log.Println("Starting server on port 8080")
