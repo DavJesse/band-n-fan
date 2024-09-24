@@ -47,17 +47,18 @@ func DateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Populate BandName field of Dates struct
-	for i := range data.Dates.Index {
-		for j := range data.Artists {
-			if data.Artists[j].Id == data.Dates.Index[i].Id {
-				data.Dates.Index[i].BandName = data.Artists[j].Name
-				break // Break loop when match is found
+	for i := range Data.Dates.Index {
+		for j := i; j < len(Data.Artists); j++ {
+			// if data.Dates.Index.Id and data.Artist.Id match, update BandName in dates.Index[i]
+			if Data.Artists[j].Id == Data.Dates.Index[i].Id {
+				Data.Dates.Index[i].BandName = Data.Artists[j].Name
+				i++ // Break loop, match found
 			}
 		}
 	}
 
 	// Execute dates template, handle errors if found
-	err := dateTemplate.Execute(w, data.Dates)
+	err = tmpl.Execute(w, Data.Dates)
 	if err != nil {
 		internalServerErrorHandler(w)
 		log.Println("Failed to execute template:", err)

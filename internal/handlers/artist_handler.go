@@ -68,7 +68,8 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	var selectedArtist api.Artist
 	var foundArtist, foundRelation bool
 
-	for _, artist := range data.Artists {
+	// Extract artist with matching id
+	for _, artist := range Data.Artists {
 		if artist.Id == id {
 			selectedArtist = artist
 			foundArtist = true
@@ -76,7 +77,8 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	for _, relation := range data.Relations.Index {
+	// Extract relation data for tour dates and locations
+	for _, relation := range Data.Relations.Index {
 		if relation.Id == id {
 			selectedArtist.Relation = relation.DatesLocations
 			foundRelation = true
