@@ -36,7 +36,7 @@ func TestFetchData(t *testing.T) {
 	var artists []Artist
 	url := mockServer.URL + "/api/artists"
 	fmt.Printf("Fetching data from: %s\n", url)
-err := FetchData(url, &artists)
+	err := FetchData(url, &artists)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
