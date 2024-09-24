@@ -40,7 +40,8 @@ func loadHomeTemplate() error {
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" || r.URL.Path != "/" {
-		http.Error(w, "Bad Request", http.StatusBadRequest)
+		BadRequestHandler(w)
+		log.Println("Bad Request")
 		return
 	}
 
@@ -51,8 +52,8 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err != nil {
+		InternalServerErrorHandler(w)
 		log.Println("Could not load API data:", err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 
