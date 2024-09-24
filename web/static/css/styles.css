@@ -66,6 +66,18 @@ section {
     transform: translate(-50%, -50%);
 }
 
+.view-more {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-more a {
+    padding: .025em .125em .025em .125em;
+    color: #eee;    
+}
+
 .back {
     width: 50%;
     margin: auto;
