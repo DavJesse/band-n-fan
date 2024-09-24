@@ -3,6 +3,7 @@ package test
 import (
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"groupie-tracker/internal/api"
@@ -39,5 +40,23 @@ func TestFetchData(t *testing.T) {
 
 	if target.ID != expectedID {
 		t.Errorf("Expected ID %d, but got %d", expectedID, target.ID)
+	}
+}
+
+func TestFetchDataInvalidURL(t *testing.T) {
+	var target interface{}
+	invalidUrl := "http://invalid_url.com" // Setup variable an invalid URL
+
+	err := api.FetchData(invalidUrl, &target) // Try to fetch data
+
+	// Check if funcction yields error
+	if err == nil {
+		t.Error("Expected an error but got nil")
+	}
+
+	// Check if function yields the correct error message
+	if !strings.Contains(err.Error(), "failed to fetch data") {
+		t.Error("Expecte the error message: 'failed to fetch data from'")
+		t.Error("Got: %v", err)
 	}
 }
