@@ -41,7 +41,7 @@ func loadDateTemplate() error {
 // DateHandler handles the date endpoint
 func DateHandler(w http.ResponseWriter, r *http.Request) {
 	if err := loadDateTemplate(); err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to load date template:", err)
 		return
 	}
@@ -60,7 +60,7 @@ func DateHandler(w http.ResponseWriter, r *http.Request) {
 	// Execute dates template, handle errors if found
 	err = tmpl.Execute(w, Data.Dates)
 	if err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to execute template:", err)
 		return
 	}

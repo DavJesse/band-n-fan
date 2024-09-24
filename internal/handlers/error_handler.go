@@ -16,12 +16,12 @@ type Issue struct {
 var hitch Issue
 
 // Template loader function to allow mocking during tests
-var loadTemplate = func() (*template.Template, error) {
+var LoadTemplate = func() (*template.Template, error) {
 	return template.ParseFiles("web/templates/error.html")
 }
 
-func badRequestHandler(w http.ResponseWriter) {
-	tmpl, err := loadTemplate()
+func BadRequestHandler(w http.ResponseWriter) {
+	tmpl, err := LoadTemplate()
 	if err != nil {
 		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
 		return
@@ -37,8 +37,8 @@ func badRequestHandler(w http.ResponseWriter) {
 	}
 }
 
-func internalServerErrorHandler(w http.ResponseWriter) {
-	tmpl, err := loadTemplate()
+func InternalServerErrorHandler(w http.ResponseWriter) {
+	tmpl, err := LoadTemplate()
 	if err != nil {
 		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
 		return
@@ -54,8 +54,8 @@ func internalServerErrorHandler(w http.ResponseWriter) {
 	}
 }
 
-func notFoundHandler(w http.ResponseWriter) {
-	tmpl, err := loadTemplate()
+func NotFoundHandler(w http.ResponseWriter) {
+	tmpl, err := LoadTemplate()
 	if err != nil {
 		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
 		return

@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"errors"
-	"groupie-tracker/internal/api"
 	"html/template"
 	"log"
 	"net/http"
+
+	"groupie-tracker/internal/api"
 )
 
 var (
@@ -58,7 +59,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	// Safely execute tmpl, handle errors if necessary
 	err = tmpl.Execute(w, Data)
 	if err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to execute home template")
 		return
 	}

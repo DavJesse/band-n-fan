@@ -1,4 +1,4 @@
-package handlers
+package test
 
 import (
 	"html/template"
@@ -6,18 +6,20 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"groupie-tracker/internal/handlers"
 )
 
 func TestBadRequestHandler(t *testing.T) {
 	// Override loadTemplate for test purposes
-	loadTemplate = func() (*template.Template, error) {
+	handlers.LoadTemplate = func() (*template.Template, error) {
 		return template.New("test").Parse("{{.Problem}}")
 	}
 
 	rec := httptest.NewRecorder()
 
 	// Call the handler
-	badRequestHandler(rec)
+	handlers.BadRequestHandler(rec)
 
 	// Check the status code
 	if status := rec.Code; status != http.StatusOK {
@@ -33,14 +35,14 @@ func TestBadRequestHandler(t *testing.T) {
 
 func TestInternalServerErrorHandler(t *testing.T) {
 	// Override loadTemplate for test purposes
-	loadTemplate = func() (*template.Template, error) {
+	handlers.LoadTemplate = func() (*template.Template, error) {
 		return template.New("test").Parse("{{.Problem}}")
 	}
 
 	rec := httptest.NewRecorder()
 
 	// Call the handler
-	internalServerErrorHandler(rec)
+	handlers.InternalServerErrorHandler(rec)
 
 	// Check the status code
 	if status := rec.Code; status != http.StatusOK {
@@ -56,14 +58,14 @@ func TestInternalServerErrorHandler(t *testing.T) {
 
 func TestNotFoundHandler(t *testing.T) {
 	// Override loadTemplate for test purposes
-	loadTemplate = func() (*template.Template, error) {
+	handlers.LoadTemplate = func() (*template.Template, error) {
 		return template.New("test").Parse("{{.Problem}}")
 	}
 
 	rec := httptest.NewRecorder()
 
 	// Call the handler
-	notFoundHandler(rec)
+	handlers.NotFoundHandler(rec)
 
 	// Check the status code
 	if status := rec.Code; status != http.StatusOK {

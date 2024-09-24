@@ -37,7 +37,7 @@ func loadLocationTemplate() error {
 
 func LocationsHandler(w http.ResponseWriter, r *http.Request) {
 	if err := loadLocationTemplate(); err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to load location template:", err)
 		return
 	}
@@ -56,7 +56,7 @@ func LocationsHandler(w http.ResponseWriter, r *http.Request) {
 	// Execute locations template
 	err = tmpl.Execute(w, Data.Locations)
 	if err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to execute template:", err)
 		return
 	}

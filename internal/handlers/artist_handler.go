@@ -40,27 +40,27 @@ func loadArtistTemplate() error {
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" && r.Method != "POST" {
-		badRequestHandler(w)
+		BadRequestHandler(w)
 		log.Println("Bad client request: not GET or POST")
 		return
 	}
 
 	if err := loadArtistTemplate(); err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to load artist template", err)
 		return
 	}
 
 	idStr := r.URL.Query().Get("id")
 	if idStr == "" {
-		badRequestHandler(w)
+		BadRequestHandler(w)
 		log.Println("Error finding Artist ID")
 		return
 	}
 
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		badRequestHandler(w)
+		BadRequestHandler(w)
 		log.Println("Invalid artist ID request")
 		return
 	}
@@ -87,17 +87,17 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if !foundArtist {
-		notFoundHandler(w)
+		NotFoundHandler(w)
 		log.Println("Artist index not found")
 		return
 	} else if !foundRelation {
-		notFoundHandler(w)
+		NotFoundHandler(w)
 		log.Println("Relation index not found")
 	}
 
 	err = artistTemplate.Execute(w, selectedArtist)
 	if err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to load selected artist template", err)
 		return
 	}

@@ -1,4 +1,4 @@
-package handlers
+package test
 
 import (
 	"net/http"
@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"groupie-tracker/internal/api"
+	"groupie-tracker/internal/handlers"
 )
 
 func TestLocationsHandler(t *testing.T) {
@@ -18,11 +19,11 @@ func TestLocationsHandler(t *testing.T) {
 	rr := httptest.NewRecorder()
 
 	// Set a mock template for testing
-	SetMockLocationTemplate("<h1>{{range .Index}}<div>{{.BandName}}</div>{{end}}</h1>")
-	SetMockLocationTemplateError(false)
+	handlers.SetMockLocationTemplate("<h1>{{range .Index}}<div>{{.BandName}}</div>{{end}}</h1>")
+	handlers.SetMockLocationTemplateError(false)
 
 	// Populate mock data
-	Data = api.Data{
+	handlers.Data = api.Data{
 		Locations: api.LocationData{
 			Index: []api.Location{
 				{Id: 1},
@@ -35,7 +36,7 @@ func TestLocationsHandler(t *testing.T) {
 		},
 	}
 
-	handler := http.HandlerFunc(LocationsHandler)
+	handler := http.HandlerFunc(handlers.LocationsHandler)
 	handler.ServeHTTP(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {

@@ -37,7 +37,7 @@ func loadRelationTemplate() error {
 
 func RelationsHandler(w http.ResponseWriter, r *http.Request) {
 	if err := loadRelationTemplate(); err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to load relation template:", err)
 		return
 	}
@@ -56,7 +56,7 @@ func RelationsHandler(w http.ResponseWriter, r *http.Request) {
 	// Execute relations template
 	err = tmpl.Execute(w, Data.Relations)
 	if err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to execute template:", err)
 		return
 	}
