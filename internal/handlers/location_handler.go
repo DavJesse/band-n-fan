@@ -15,19 +15,18 @@ func LocationsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Populate BandName field of Dates struct
-	for i := range data.Locations.Index {
-		for j := i; j < len(data.Artists); j++ {
-
+	for i := range Data.Locations.Index {
+		for j := i; j < len(Data.Artists); j++ {
 			// if data.Dates.Index.Id and data.Artist.Id match, update BandName in dates.Index[i]
-			if data.Artists[j].Id == data.Locations.Index[i].Id {
-				data.Locations.Index[i].BandName = data.Artists[j].Name
+			if Data.Artists[j].Id == Data.Locations.Index[i].Id {
+				Data.Locations.Index[i].BandName = Data.Artists[j].Name
 				i++ // Break loop, match found
 			}
 		}
 	}
 
 	// Execute locations template
-	err = tmpl.Execute(w, data.Locations)
+	err = tmpl.Execute(w, Data.Locations)
 	if err != nil {
 		internalServerErrorHandler(w)
 		log.Println("Failed to execute template", err)

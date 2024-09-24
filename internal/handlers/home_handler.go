@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-var data, err = api.LoadData() // Load data from API
+var Data, err = api.LoadData() // Load data from API
 var tmpl *template.Template    // Initialize variable to hold our html templates
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
@@ -33,7 +33,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Safely execute tmpl, handle errors if necessary
-	err = tmpl.Execute(w, data)
+	err = tmpl.Execute(w, Data)
 	if err != nil {
 		internalServerErrorHandler(w)
 		log.Println("Failed to execute home template")
