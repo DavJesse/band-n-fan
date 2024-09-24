@@ -54,7 +54,7 @@ func LocationsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Execute locations template
-	err = tmpl.Execute(w, Data.Locations)
+	err = locationTemplate.Execute(w, Data.Locations)
 	if err != nil {
 		InternalServerErrorHandler(w)
 		log.Println("Failed to execute template:", err)
