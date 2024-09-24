@@ -63,9 +63,9 @@ var (
 
 var apiURL = "https://groupietrackers.herokuapp.com/api"
 
-// fetchData is used to retrieve json data from a specified url...
+// FetchData is used to retrieve json data from a specified url...
 // ... and storing data in go data structures.
-func fetchData(url string, target interface{}) error {
+func FetchData(url string, target interface{}) error {
 
 	// Retrieve http response from url containing json data
 	// Handle any errors encountered
@@ -97,16 +97,16 @@ func LoadData() (Data, error) {
 	var err error
 
 	// Load data to 'ariststs', 'locations', 'dates', and 'relations'
-	if err = fetchData(apiURL+"/artists", &artists); err != nil {
+	if err = FetchData(apiURL+"/artists", &artists); err != nil {
 		return Data{}, err
 	}
-	if err = fetchData(apiURL+"/locations", &locations); err != nil {
+	if err = FetchData(apiURL+"/locations", &locations); err != nil {
 		return Data{}, err
 	}
-	if err = fetchData(apiURL+"/dates", &dates); err != nil {
+	if err = FetchData(apiURL+"/dates", &dates); err != nil {
 		return Data{}, err
 	}
-	if err = fetchData(apiURL+"/relation", &relations); err != nil {
+	if err = FetchData(apiURL+"/relation", &relations); err != nil {
 		return Data{}, err
 	}
 
