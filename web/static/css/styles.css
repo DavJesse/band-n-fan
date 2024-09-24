@@ -78,6 +78,10 @@ section {
     color: #eee;    
 }
 
+.view-more a:active {
+    color: #65016e;
+}
+
 .back {
     width: 50%;
     margin: auto;
