@@ -58,7 +58,7 @@ func DateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Execute dates template, handle errors if found
-	err = tmpl.Execute(w, Data.Dates)
+	err = dateTemplate.Execute(w, Data.Dates)
 	if err != nil {
 		InternalServerErrorHandler(w)
 		log.Println("Failed to execute template:", err)
