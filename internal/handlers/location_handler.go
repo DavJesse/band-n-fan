@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	locationTemplate         *template.Template
-	mockLocationTemplate     string
+	locationTemplate          *template.Template
+	mockLocationTemplate      string
 	mockLocationTemplateError bool
 )
 

@@ -17,7 +17,7 @@ func TestHomeHandler(t *testing.T) {
 	rr := httptest.NewRecorder()
 
 	// Set a mock template
-	handlers.SetMockHomeTemplate("Artists") // Mock template content for testing
+	handlers.SetMockHomeTemplate("Artists")  // Mock template content for testing
 	handlers.SetMockHomeTemplateError(false) // Ensure no error is set
 
 	handler := http.HandlerFunc(handlers.HomeHandler)
@@ -34,7 +34,6 @@ func TestHomeHandler(t *testing.T) {
 			rr.Body.String(), expected)
 	}
 }
-
 
 func TestHomeHandlerMethodNotAllowed(t *testing.T) {
 	// Test with a POST request, which should not be allowed

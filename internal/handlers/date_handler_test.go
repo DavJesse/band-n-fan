@@ -24,7 +24,7 @@ func TestDateHandler(t *testing.T) {
 	SetMockDateTemplateError(false)
 
 	// Populate mock data
-	data = api.Data{
+	Data = api.Data{
 		Dates: api.DateData{
 			Index: []api.Date{
 				{Id: 1},

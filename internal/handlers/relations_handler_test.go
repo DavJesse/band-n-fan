@@ -22,7 +22,7 @@ func TestRelationsHandler(t *testing.T) {
 	SetMockRelationTemplateError(false)
 
 	// Populate mock data
-	data = api.Data{
+	Data = api.Data{
 		Relations: api.RelationData{
 			Index: []api.Relation{
 				{Id: 1},

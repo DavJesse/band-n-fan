@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	data, err         = api.LoadData() // Load data from API
+	Data, err         = api.LoadData() // Load data from API
 	tmpl              *template.Template
 	mockTemplateError bool
 	mockTemplate      string

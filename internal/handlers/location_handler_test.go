@@ -22,7 +22,7 @@ func TestLocationsHandler(t *testing.T) {
 	SetMockLocationTemplateError(false)
 
 	// Populate mock data
-	data = api.Data{
+	Data = api.Data{
 		Locations: api.LocationData{
 			Index: []api.Location{
 				{Id: 1},

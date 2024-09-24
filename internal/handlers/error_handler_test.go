@@ -20,7 +20,7 @@ func TestBadRequestHandler(t *testing.T) {
 	badRequestHandler(rec)
 
 	// Check the status code
-	if status := rec.Code; status != http.StatusOK{
+	if status := rec.Code; status != http.StatusOK {
 		t.Errorf("expected status code %d, but got %d", http.StatusBadRequest, status)
 	}
 
@@ -66,7 +66,7 @@ func TestNotFoundHandler(t *testing.T) {
 	notFoundHandler(rec)
 
 	// Check the status code
-	if status := rec.Code; status != http.StatusOK{
+	if status := rec.Code; status != http.StatusOK {
 		t.Errorf("expected status code %d, but got %d", http.StatusNotFound, status)
 	}
 
@@ -76,4 +76,3 @@ func TestNotFoundHandler(t *testing.T) {
 		t.Errorf("expected response body to contain %q, but got %q", expected, rec.Body.String())
 	}
 }
-

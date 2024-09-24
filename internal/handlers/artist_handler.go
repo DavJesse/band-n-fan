@@ -9,9 +9,10 @@ import (
 
 	"groupie-tracker/internal/api"
 )
+
 var (
-	artistTemplate *template.Template
-	mockArtistTemplate string
+	artistTemplate          *template.Template
+	mockArtistTemplate      string
 	mockArtistTemplateError bool
 )
 
@@ -36,7 +37,6 @@ func loadArtistTemplate() error {
 	artistTemplate, err = template.ParseFiles("web/templates/artist.html")
 	return err
 }
-
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" && r.Method != "POST" {

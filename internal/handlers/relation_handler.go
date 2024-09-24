@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	relationTemplate         *template.Template
-	mockRelationTemplate     string
+	relationTemplate          *template.Template
+	mockRelationTemplate      string
 	mockRelationTemplateError bool
 )
 
@@ -53,7 +53,7 @@ func RelationsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Execute locations template
+	// Execute relations template
 	err = tmpl.Execute(w, Data.Relations)
 	if err != nil {
 		internalServerErrorHandler(w)
