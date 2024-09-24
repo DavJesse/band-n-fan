@@ -57,6 +57,6 @@ func TestFetchDataInvalidURL(t *testing.T) {
 	// Check if function yields the correct error message
 	if !strings.Contains(err.Error(), "failed to fetch data") {
 		t.Error("Expecte the error message: 'failed to fetch data from'")
-		t.Error("Got: %v", err)
+		t.Errorf("Got: %v", err)
 	}
 }
