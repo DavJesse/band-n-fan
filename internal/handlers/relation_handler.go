@@ -1,16 +1,44 @@
 package handlers
 
 import (
+	"errors"
 	"html/template"
 	"log"
 	"net/http"
 )
 
+var (
+	relationTemplate          *template.Template
+	mockRelationTemplate      string
+	mockRelationTemplateError bool
+)
+
+func SetMockRelationTemplate(content string) {
+	mockRelationTemplate = content
+}
+
+func SetMockRelationTemplateError(shouldError bool) {
+	mockRelationTemplateError = shouldError
+}
+
+func loadRelationTemplate() error {
+	if mockRelationTemplateError {
+		return errors.New("mock relation template loading error")
+	}
+	if mockRelationTemplate != "" {
+		var err error
+		relationTemplate, err = template.New("relation").Parse(mockRelationTemplate)
+		return err
+	}
+	var err error
+	relationTemplate, err = template.ParseFiles("web/templates/relation.html")
+	return err
+}
+
 func RelationsHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err = template.ParseFiles("web/templates/relation.html")
-	if err != nil {
-		internalServerErrorHandler(w)
-		log.Println("Failed to load template: ", err)
+	if err := loadRelationTemplate(); err != nil {
+		InternalServerErrorHandler(w)
+		log.Println("Failed to load relation template:", err)
 		return
 	}
 
@@ -25,11 +53,11 @@ func RelationsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Execute locations template
+	// Execute relations template
 	err = tmpl.Execute(w, Data.Relations)
 	if err != nil {
-		internalServerErrorHandler(w)
-		log.Println("Failed to execute template", err)
+		InternalServerErrorHandler(w)
+		log.Println("Failed to execute template:", err)
 		return
 	}
 }

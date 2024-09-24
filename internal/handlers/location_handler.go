@@ -1,16 +1,44 @@
 package handlers
 
 import (
+	"errors"
 	"html/template"
 	"log"
 	"net/http"
 )
 
+var (
+	locationTemplate          *template.Template
+	mockLocationTemplate      string
+	mockLocationTemplateError bool
+)
+
+func SetMockLocationTemplate(content string) {
+	mockLocationTemplate = content
+}
+
+func SetMockLocationTemplateError(shouldError bool) {
+	mockLocationTemplateError = shouldError
+}
+
+func loadLocationTemplate() error {
+	if mockLocationTemplateError {
+		return errors.New("mock location template loading error")
+	}
+	if mockLocationTemplate != "" {
+		var err error
+		locationTemplate, err = template.New("location").Parse(mockLocationTemplate)
+		return err
+	}
+	var err error
+	locationTemplate, err = template.ParseFiles("web/templates/location.html")
+	return err
+}
+
 func LocationsHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err = template.ParseFiles("web/templates/location.html")
-	if err != nil {
-		internalServerErrorHandler(w)
-		log.Println("Failed to load template: ", err)
+	if err := loadLocationTemplate(); err != nil {
+		InternalServerErrorHandler(w)
+		log.Println("Failed to load location template:", err)
 		return
 	}
 
@@ -26,10 +54,10 @@ func LocationsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Execute locations template
-	err = tmpl.Execute(w, Data.Locations)
+	err = locationTemplate.Execute(w, Data.Locations)
 	if err != nil {
-		internalServerErrorHandler(w)
-		log.Println("Failed to execute template", err)
+		InternalServerErrorHandler(w)
+		log.Println("Failed to execute template:", err)
 		return
 	}
 }

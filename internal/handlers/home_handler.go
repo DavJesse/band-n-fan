@@ -1,41 +1,65 @@
 package handlers
 
 import (
-	"groupie-tracker/internal/api"
+	"errors"
 	"html/template"
 	"log"
 	"net/http"
+
+	"groupie-tracker/internal/api"
 )
 
-var Data, err = api.LoadData() // Load data from API
-var tmpl *template.Template    // Initialize variable to hold our html templates
+var (
+	Data, err         = api.LoadData() // Load data from API
+	tmpl              *template.Template
+	mockTemplateError bool
+	mockTemplate      string
+)
+
+func SetMockHomeTemplate(content string) {
+	mockTemplate = content
+}
+
+func SetMockHomeTemplateError(shouldError bool) {
+	mockTemplateError = shouldError
+}
+
+func loadHomeTemplate() error {
+	if mockTemplateError {
+		return errors.New("mock template loading error")
+	}
+	if mockTemplate != "" {
+		var err error
+		tmpl, err = template.New("home").Parse(mockTemplate)
+		return err
+	}
+	var err error
+	tmpl, err = template.ParseFiles("web/templates/home.html")
+	return err
+}
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	// Restrict access to home page, execute error template
 	if r.Method != "GET" || r.URL.Path != "/" {
-		badRequestHandler(w)
+		http.Error(w, "Bad Request", http.StatusBadRequest)
 		return
 	}
 
-	// handle errors from API call
-	if err != nil {
-		internalServerErrorHandler(w)
-		log.Println("Could not load API data")
+	if err := loadHomeTemplate(); err != nil {
+		log.Println("Failed to load home template:", err)
+		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
 		return
 	}
 
-	// Create Html template from home.html, handle errors if necessary
-	tmpl, err = template.ParseFiles("web/templates/home.html")
 	if err != nil {
-		internalServerErrorHandler(w)
-		log.Println("Failed to load home template")
+		log.Println("Could not load API data:", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 
 	// Safely execute tmpl, handle errors if necessary
 	err = tmpl.Execute(w, Data)
 	if err != nil {
-		internalServerErrorHandler(w)
+		InternalServerErrorHandler(w)
 		log.Println("Failed to execute home template")
 		return
 	}

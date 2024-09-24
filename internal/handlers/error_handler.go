@@ -12,12 +12,16 @@ type Issue struct {
 }
 
 // Initialize variable to hold error message and status codes
+
 var hitch Issue
 
-func badRequestHandler(w http.ResponseWriter) {
-	tmpl, err = template.ParseFiles("web/templates/error.html")
+// Template loader function to allow mocking during tests
+var LoadTemplate = func() (*template.Template, error) {
+	return template.ParseFiles("web/templates/error.html")
+}
 
-	// Use writer to render error if error page unavailable
+func BadRequestHandler(w http.ResponseWriter) {
+	tmpl, err := LoadTemplate()
 	if err != nil {
 		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
 		return
@@ -26,7 +30,6 @@ func badRequestHandler(w http.ResponseWriter) {
 	hitch.StatusCode = http.StatusBadRequest
 	hitch.Problem = "Bad Request!"
 
-	// Render template in html, handle errors if necesary
 	err = tmpl.Execute(w, hitch)
 	if err != nil {
 		http.Error(w, "Could not execute error template, error page unavailable", http.StatusInternalServerError)
@@ -34,10 +37,8 @@ func badRequestHandler(w http.ResponseWriter) {
 	}
 }
 
-func internalServerErrorHandler(w http.ResponseWriter) {
-	tmpl, err = template.ParseFiles("web/templates/error.html")
-
-	// Use writer to render error if error page unavailable
+func InternalServerErrorHandler(w http.ResponseWriter) {
+	tmpl, err := LoadTemplate()
 	if err != nil {
 		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
 		return
@@ -46,7 +47,6 @@ func internalServerErrorHandler(w http.ResponseWriter) {
 	hitch.StatusCode = http.StatusInternalServerError
 	hitch.Problem = "Internal Server Error!"
 
-	// Render template in html
 	err = tmpl.Execute(w, hitch)
 	if err != nil {
 		http.Error(w, "Could not execute error template, error page unavailable", http.StatusInternalServerError)
@@ -54,10 +54,8 @@ func internalServerErrorHandler(w http.ResponseWriter) {
 	}
 }
 
-func notFoundHandler(w http.ResponseWriter) {
-	tmpl, err = template.ParseFiles("web/templates/error.html")
-
-	// Use writer to render error if error page unavailable
+func NotFoundHandler(w http.ResponseWriter) {
+	tmpl, err := LoadTemplate()
 	if err != nil {
 		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
 		return
@@ -66,7 +64,6 @@ func notFoundHandler(w http.ResponseWriter) {
 	hitch.StatusCode = http.StatusNotFound
 	hitch.Problem = "Not Found!"
 
-	// Render template in html
 	err = tmpl.Execute(w, hitch)
 	if err != nil {
 		http.Error(w, "Could not execute error template, error page unavailable", http.StatusInternalServerError)
