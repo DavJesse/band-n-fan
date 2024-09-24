@@ -54,7 +54,7 @@ func RelationsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Execute relations template
-	err = tmpl.Execute(w, Data.Relations)
+	err = relationTemplate.Execute(w, Data.Relations)
 	if err != nil {
 		InternalServerErrorHandler(w)
 		log.Println("Failed to execute template:", err)
