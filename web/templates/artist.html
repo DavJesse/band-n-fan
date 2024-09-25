@@ -29,18 +29,21 @@
         </div>
     </section>
 
-    <div class="artist-details">
-    <h2>Concert Dates:</h2>
-    {{ range $key, $values := .Relation }}
-       <p>{{ $key }}:</p>
+    <div class="item-grid">
+        <div class="artist-item">
+        <h2>Concert Dates:</h2>
         <ul>
-           {{ range $index, $value := $values }}
-            <li><p>{{ $value }}</p></li>
-            {{end}}
+            {{ range $key, $value := .Relation }}
+           <h3>{{ $key }}</h3>
+            {{ range $index, $dates := $value }}
+            <li>{{ $dates }}</li>
+            {{ end }}
+            <br>
+            {{ end }}
         </ul>
-        {{ end }}
-    </p>
-</div>
+    </div>
+
+    </div>
    
 </body>
 </html>

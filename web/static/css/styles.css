@@ -66,6 +66,22 @@ section {
     transform: translate(-50%, -50%);
 }
 
+.view-more {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-more a {
+    padding: .025em .125em .025em .125em;
+    color: #eee;    
+}
+
+.view-more a:active {
+    color: #65016e;
+}
+
 .back {
     width: 50%;
     margin: auto;
@@ -127,18 +143,16 @@ section {
     color: #FFFFFF;
 }
 
-.artist-details h2 {
-    font-size: 25px;
-    margin: 6px;
-    text-align: left;
-    color: #FFFFFF;
-}
-
 .overview p {
     font-size: 18px;
     margin: 20px;
     visibility: hidden;
     opacity: 0;
+    text-align: center;
+}
+
+.overview h1 {
+    text-align: center;
 }
 
 .artist-details {
