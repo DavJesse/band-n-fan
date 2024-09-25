@@ -148,6 +148,11 @@ section {
     margin: 20px;
     visibility: hidden;
     opacity: 0;
+    text-align: center;
+}
+
+.overview h1 {
+    text-align: center;
 }
 
 .artist-details {
