@@ -39,9 +39,9 @@ func loadArtistTemplate() error {
 }
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" && r.Method != "POST" {
+	if r.Method != "GET" {
 		BadRequestHandler(w)
-		log.Println("Bad client request: not GET or POST")
+		log.Println("Bad client request: not GET")
 		return
 	}
 
