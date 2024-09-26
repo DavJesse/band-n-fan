@@ -20,7 +20,15 @@
                 <li><a href="/relations">Relations</a></li>
             </ul>            
         </div>
-    </nav>   
+    </nav>
+    
+    <div class="search">
+        <h2>Artist Search</h2>
+        <form method="GET" action="/">
+            <input type="text" name="artist" placeholder="search for artist..." value="{{ .Query }}">
+            <button type="submit">search</button>
+        </form>
+    </div>
 
     <div class="card-container">
         {{ range .Artists }}
