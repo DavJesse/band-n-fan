@@ -46,7 +46,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err := loadHomeTemplate(); err != nil {
 		log.Println("Failed to load home template:", err)
-		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
+		InternalServerErrorHandler(w)
 		return
 	}
 
