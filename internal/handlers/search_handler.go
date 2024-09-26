@@ -26,7 +26,7 @@ func SearchArtist(query string) api.Data {
 			result.Artists = append(result.Artists, artist)
 		}
 		// Search by creation date
-		if isDecimal(query) {
+		if IsNumeric(query) {
 			date, _ := strconv.Atoi(query)
 			if date == artist.CreationDate {
 				result.Artists = append(result.Artists, artist)
@@ -61,4 +61,14 @@ func SearchArtist(query string) api.Data {
 	}
 
 	return result
+}
+
+func IsNumeric(str string) bool {
+	// Search for instances of non-numeric characters
+	for _, ch := range str {
+		if !(ch >= '0' && ch <= '9') {
+			return false
+		}
+	}
+	return true
 }
