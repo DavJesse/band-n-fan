@@ -20,7 +20,7 @@
                 <li><a href="/relations">Relations</a></li>
             </ul>            
         </div>
-    </nav> 
+    </nav>
     
     <div class="search">
         <h2>Artist Search</h2>
@@ -30,6 +30,7 @@
         </form>
     </div>
 
+    {{ if .Artists }}
     <div class="card-container">
         {{ range .Artists }}
         <div class="cards">
@@ -44,5 +45,10 @@
         </div>
         {{ end }}
     </div>
+
+    {{ else }}
+    <p>No results found!</p>
+    {{end}}
+  
 </body>
 </html>
