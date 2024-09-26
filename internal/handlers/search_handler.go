@@ -1,14 +1,41 @@
 package handlers
 
 import (
-	"groupie-tracker/internal/api"
+	"html/template"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"groupie-tracker/internal/api"
 )
 
-func SearchHandler(w http.ResponseWriter, r *http.Response) {
+func SearchHandler(w http.ResponseWriter, r *http.Request) {
+	// Restrict acces to '/search' page
+	if r.Method != "POST" || r.URL.Path != "/search" {
+		BadRequestHandler(w)
+		return
+	}
 
+	// Update tmpl with http template of search.html
+	tmpl, err = template.ParseFiles("web/templates/search.html")
+	if err != nil {
+		InternalServerErrorHandler(w)
+		log.Println("Failed to load search template:", err)
+		return
+	}
+
+	query := r.URL.Query().Get("artist") // Retrieve search query from html form
+
+	results := SearchArtist(query) // Retrieve results
+
+	// Execute tmpl with search query
+	err = tmpl.Execute(w, results)
+	if err != nil {
+		InternalServerErrorHandler(w)
+		log.Println("Failed to execute search template:", err)
+		return
+	}
 }
 
 func SearchArtist(query string) api.Data {
