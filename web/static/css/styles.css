@@ -322,4 +322,51 @@ img {
         background-image: url('../images/background-1280x801.jpg'); /* Use smaller image for mobile */
         background-color: #020816; 
     }
+    .nav-bar {
+        padding: 10px;
+    }
+    
+    .nav-bar a {
+        font-size: 16px;
+        margin-right: 20px;
+    }
+    
+    .logo-container a {
+        font-size: 30px;
+    }
+    
+    section {
+        max-width: 95%;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    h2 {
+        font-size: 22px;
+    }
+    .nav-bar a, .back a {
+        padding: 10px;
+        margin: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-div {
+        flex-direction: column;
+    }
+    
+    .item-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .artist-bio {
+        flex-direction: column;
+    }
+    
+    .artist-bio .image-container img {
+        width: 200px;
+        height: 200px;
+    }
 }
