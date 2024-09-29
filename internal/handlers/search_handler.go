@@ -109,17 +109,17 @@ func SuggestHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(results)
 }
 
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err = template.ParseFiles("web/templates/search_results.html")
-	if err != nil {
-		InternalServerErrorHandler(w)
-		log.Println("Failed to load search template:", err)
-		return
-	}
-	err = tmpl.Execute(w, nil)
-	if err != nil {
-		InternalServerErrorHandler(w)
-		log.Println("Failed to load search template:", err)
-		return
-	}
-}
+// func IndexHandler(w http.ResponseWriter, r *http.Request) {
+// 	tmpl, err = template.ParseFiles("web/templates/search_results.html")
+// 	if err != nil {
+// 		InternalServerErrorHandler(w)
+// 		log.Println("Failed to load search template:", err)
+// 		return
+// 	}
+// 	err = tmpl.Execute(w, nil)
+// 	if err != nil {
+// 		InternalServerErrorHandler(w)
+// 		log.Println("Failed to load search template:", err)
+// 		return
+// 	}
+// }
