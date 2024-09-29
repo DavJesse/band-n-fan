@@ -5,7 +5,7 @@ document.getElementById('search-box').addEventListener('input', function() {
         return;
     }
 
-    fetch('/result?q=' + encodeURIComponent(query));
+    fetch('/result?q=' + encodeURIComponent(query))
     .then(response => response.json())
     .then(data => {
         const suggestions = document.getElementById('suggestions');
