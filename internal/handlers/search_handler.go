@@ -103,7 +103,7 @@ func IsNumeric(str string) bool {
 }
 
 func SuggestHandler(w http.ResponseWriter, r *http.Request) {
-	query := r.Url.Query().Get("q") // Retrieve search query from html form
+	query := r.URL.Query().Get("q") // Retrieve search query from html form
 	results := SearchArtist(query)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(results)
