@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>    
+    
+    <h1>Artists</h1>
+    
+    <nav class="nav-bar">
+        <div class="nav-div">
+            <div class="logo-container"><a href="#">GroupieTracker</a></div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="/locations">Locations</a></li>
+                <li><a href="/dates">Dates</a></li>
+                <li><a href="/relations">Relations</a></li>
+            </ul>            
+        </div>
+    </nav>
+    
+    <div class="search">
+        <h2>Artist Search</h2>
+        <form method="GET" action="/results">
+            <input type="text" name="artist" placeholder="search for artist...">
+            <button type="submit">search</button>
+        </form>
+    </div>
+
+    {{ if .Artists }}
+    <div class="card-container">
+        {{ range .Artists }}
+        <div class="cards">
+            <a href="/artist/?id={{ .Id }}">
+            <img src="{{.Image}}" alt="{{.Name}}">
+            <div class="overview">
+                <h1>{{ .Name }}</h1>
+                <p>Creation Date: {{ .CreationDate }}<br>1st Album: {{ .FirstAlbum }}</p>
+                <div class="view-more"><a href="/artist/?id={{ .Id }}">View Artist Details...</a></div>
+            </div>
+        </a>
+        </div>
+        {{ end }}
+    </div>
+
+    {{ else }}
+    <p>No results found!</p>
+    {{end}}
+  
+</body>
+</html>
