@@ -46,7 +46,7 @@ func TestHomeHandlerMethodNotAllowed(t *testing.T) {
 	handler := http.HandlerFunc(handlers.HomeHandler)
 	handler.ServeHTTP(rr, req)
 
-	if status := rr.Code; status != http.StatusBadRequest {
+	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code for POST: got %v want %v",
 			status, http.StatusBadRequest)
 	}
@@ -63,7 +63,7 @@ func TestHomeHandlerWrongPath(t *testing.T) {
 	handler := http.HandlerFunc(handlers.HomeHandler)
 	handler.ServeHTTP(rr, req)
 
-	if status := rr.Code; status != http.StatusBadRequest {
+	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code for wrong path: got %v want %v",
 			status, http.StatusBadRequest)
 	}

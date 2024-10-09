@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
@@ -100,3 +101,25 @@ func IsNumeric(str string) bool {
 	}
 	return true
 }
+
+func SuggestHandler(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query().Get("q") // Retrieve search query from html form
+	results := SearchArtist(query)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(results)
+}
+
+// func IndexHandler(w http.ResponseWriter, r *http.Request) {
+// 	tmpl, err = template.ParseFiles("web/templates/search_results.html")
+// 	if err != nil {
+// 		InternalServerErrorHandler(w)
+// 		log.Println("Failed to load search template:", err)
+// 		return
+// 	}
+// 	err = tmpl.Execute(w, nil)
+// 	if err != nil {
+// 		InternalServerErrorHandler(w)
+// 		log.Println("Failed to load search template:", err)
+// 		return
+// 	}
+// }
