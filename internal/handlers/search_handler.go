@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"groupie-tracker/internal/api"
 	"html/template"
 	"log"
 	"net/http"
@@ -27,7 +28,8 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 
 	query := r.URL.Query().Get("artist") // Retrieve search query from html form
 
-	results := SearchArtist(query) // Retrieve results
+	ids := SearchArtist(query)       // Retrieve results
+	results := GetResults(ids, Data) //Retrieve results
 
 	// Execute tmpl with search query
 	err = tmpl.Execute(w, results)
@@ -108,6 +110,20 @@ func IdExists(ids []int, id int) bool {
 		}
 	}
 	return false
+}
+
+func GetResults(ids []int, data api.Data) []api.Artist {
+	var results []api.Artist
+
+	for i := range ids {
+		for _, artist := range data.Artists {
+			if ids[i] == artist.Id {
+				results = append(results, artist)
+				break
+			}
+		}
+	}
+	return results
 }
 
 func SuggestHandler(w http.ResponseWriter, r *http.Request) {
