@@ -7,8 +7,6 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-
-	"groupie-tracker/internal/api"
 )
 
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
@@ -40,32 +38,32 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func SearchArtist(query string) api.Data {
-	var result api.Data
+func SearchArtist(query string) []int {
+	var resultIDs []int
 	query = strings.ToLower(query)
 
 	// Search for matching artist
 	for _, artist := range Data.Artists {
 		// Search by name
-		if strings.Contains(artist.Name, query) {
-			result.Artists = append(result.Artists, artist)
+		if strings.Contains(artist.Name, query) && !IdExists(resultIDs, artist.Id) {
+			resultIDs = append(resultIDs, artist.Id)
 		}
 		// Search by FirstAlbum Date
-		if strings.Contains(artist.FirstAlbum, query) {
-			result.Artists = append(result.Artists, artist)
+		if strings.Contains(artist.FirstAlbum, query) && !IdExists(resultIDs, artist.Id) {
+			resultIDs = append(resultIDs, artist.Id)
 		}
 		// Search by creation date
 		if IsNumeric(query) {
 			date, _ := strconv.Atoi(query)
-			if date == artist.CreationDate {
-				result.Artists = append(result.Artists, artist)
+			if date == artist.CreationDate && !IdExists(resultIDs, artist.Id) {
+				resultIDs = append(resultIDs, artist.Id)
 			}
 		}
 
 		// Search by band members
 		for i := range artist.Members {
-			if strings.Contains(artist.Members[i], query) {
-				result.Artists = append(result.Artists, artist)
+			if strings.Contains(artist.Members[i], query) && !IdExists(resultIDs, artist.Id) {
+				resultIDs = append(resultIDs, artist.Id)
 				break
 			}
 		}
@@ -74,8 +72,8 @@ func SearchArtist(query string) api.Data {
 	// Search for matching date
 	for _, dateObj := range Data.Dates.Index {
 		for _, date := range dateObj.Dates {
-			if strings.Contains(date, query) {
-				result.Dates.Index = append(result.Dates.Index, dateObj)
+			if strings.Contains(date, query) && !IdExists(resultIDs, dateObj.Id) {
+				resultIDs = append(resultIDs, dateObj.Id)
 			}
 		}
 	}
@@ -83,13 +81,13 @@ func SearchArtist(query string) api.Data {
 	// Search for matching locations
 	for _, locationObj := range Data.Locations.Index {
 		for _, location := range locationObj.Locations {
-			if strings.Contains(location, query) {
-				result.Locations.Index = append(result.Locations.Index, locationObj)
+			if strings.Contains(location, query) && !IdExists(resultIDs, locationObj.Id) {
+				resultIDs = append(resultIDs, locationObj.Id)
 			}
 		}
 	}
 
-	return result
+	return resultIDs
 }
 
 func IsNumeric(str string) bool {
@@ -100,6 +98,16 @@ func IsNumeric(str string) bool {
 		}
 	}
 	return true
+}
+
+// Check if id exists in a slice of ids
+func IdExists(ids []int, id int) bool {
+	for i := range ids {
+		if ids[i] == id {
+			return true
+		}
+	}
+	return false
 }
 
 func SuggestHandler(w http.ResponseWriter, r *http.Request) {

@@ -5,6 +5,7 @@ document.getElementById('search-box').addEventListener('input', function() {
         return;
     }
 
+    console.log(query)
     fetch('/results?q=' + encodeURIComponent(query))
     .then(response => response.json())
     .then(data => {
