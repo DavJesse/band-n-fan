@@ -41,7 +41,6 @@ func loadHomeTemplate() error {
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" || r.URL.Path != "/" {
 		BadRequestHandler(w)
-		log.Println("Home handler bad error")
 		return
 	}
 
