@@ -30,9 +30,9 @@
         </form>
     </div>
 
-    {{ if .Artists }}
+    {{ if . }}
     <div class="card-container">
-        {{ range .Artists }}
+        {{ range . }}
         <div class="cards">
             <a href="/artist/?id={{ .Id }}">
             <img src="{{.Image}}" alt="{{.Name}}">
