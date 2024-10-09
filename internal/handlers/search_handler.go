@@ -2,12 +2,13 @@ package handlers
 
 import (
 	"encoding/json"
-	"groupie-tracker/internal/api"
 	"html/template"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"groupie-tracker/internal/api"
 )
 
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
@@ -29,7 +30,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("artist") // Retrieve search query from html form
 
 	ids := SearchArtist(query)       // Retrieve results
-	results := GetResults(ids, Data) //Retrieve results
+	results := GetResults(ids, Data) // Retrieve results
 
 	// Execute tmpl with search query
 	err = tmpl.Execute(w, results)

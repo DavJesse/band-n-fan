@@ -66,7 +66,6 @@ var apiURL = "https://groupietrackers.herokuapp.com/api"
 // FetchData is used to retrieve json data from a specified url...
 // ... and storing data in go data structures.
 func FetchData(url string, target interface{}) error {
-
 	// Retrieve http response from url containing json data
 	// Handle any errors encountered
 	// Close response body at the termination of function

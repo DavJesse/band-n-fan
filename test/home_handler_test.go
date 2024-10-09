@@ -1,11 +1,12 @@
 package test
 
 import (
-	"groupie-tracker/internal/handlers"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"groupie-tracker/internal/handlers"
 )
 
 func TestHomeHandler(t *testing.T) {
