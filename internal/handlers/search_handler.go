@@ -47,7 +47,7 @@ func SearchArtist(query string) []int {
 	// Search for matching artist
 	for _, artist := range Data.Artists {
 		// Search by name
-		if strings.Contains(artist.Name, query) && !IdExists(resultIDs, artist.Id) {
+		if strings.Contains(strings.ToLower(artist.Name), query) && !IdExists(resultIDs, artist.Id) {
 			resultIDs = append(resultIDs, artist.Id)
 		}
 		// Search by FirstAlbum Date
@@ -64,7 +64,7 @@ func SearchArtist(query string) []int {
 
 		// Search by band members
 		for i := range artist.Members {
-			if strings.Contains(artist.Members[i], query) && !IdExists(resultIDs, artist.Id) {
+			if strings.Contains(strings.ToLower(artist.Members[i]), query) && !IdExists(resultIDs, artist.Id) {
 				resultIDs = append(resultIDs, artist.Id)
 				break
 			}
