@@ -40,6 +40,23 @@ body {
     color: #eee;
 }
 
+#suggestions {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none;
+    background-color: #eee;
+}
+
+#suggestions li {
+    padding: 5px;
+    cursor: pointer;
+}
+
+#suggestions li:hover {
+    background-color: #eee;
+}
+
 h1 {
     margin: 17px;
     font-size: 28px;

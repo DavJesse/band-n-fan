@@ -21,6 +21,7 @@ func main() {
 	http.HandleFunc("/dates", handlers.DateHandler)          // Serve date.html
 	http.HandleFunc("/locations", handlers.LocationsHandler) // Serve location.html
 	http.HandleFunc("/relations", handlers.RelationsHandler) // Serve relation.html
+	http.HandleFunc("/suggestions", handlers.SuggestHandler) // Serve suggestions.json
 	http.HandleFunc("/results", handlers.SearchHandler)      // Serve search.html
 
 	// Start server
