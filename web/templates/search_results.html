@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="/static/js/scripts.js" defer></script>
 </head>
 <body>    
     
@@ -24,10 +25,10 @@
     
     <div class="search">
         <h2>Artist Search</h2>
-        <form method="GET" action="/results">
-            <input type="text" name="artist" id="search-box" placeholder="search for artist...">
-            <button type="submit">search</button>
-        </form>
+        <input type="text" id="search-box" oninput="fetchSuggestions()" placeholder="search for artist...">
+        <select id="suggestions-dropdown" onchange="redirctToSearchResult()">
+            <option value="">Select an artist</option>
+        </select>
     </div>
 
     {{ if . }}
@@ -50,6 +51,5 @@
     <p>No results found!</p>
     {{end}}
   
-    <script src="/web/static/js/scripts.js"></script>
 </body>
 </html>
