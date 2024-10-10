@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="/static/js/scripts.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
 </head>
 <body>    
     
@@ -22,13 +24,14 @@
         </div>
     </nav>
     
-    <div class="search">
-        <h2>Artist Search</h2>
-        <form method="GET" action="/results">
-            <input type="text" name="artist" id="search-box" placeholder="search for artist...">
-            <button type="submit">search</button>
+    <form method="GET" action="/results">
+        <div class="search">
+            <span class="search-icon material-symbols-outlined">search</span>
+                <input type="search" name="artist" id="search-box" oninput="fetchSuggestions()" placeholder="search for artist...">
+                <button type="submit"></button>
+            </div>
+            <select id="suggestions-dropdown"></select>
         </form>
-    </div>
 
     {{ if . }}
     <div class="card-container">
@@ -50,6 +53,5 @@
     <p>No results found!</p>
     {{end}}
   
-    <script src="/web/static/js/scripts.js"></script>
 </body>
 </html>
