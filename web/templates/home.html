@@ -6,6 +6,7 @@
     <title>home</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <script src="/static/js/scripts.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
 </head>
 <body>    
     
@@ -23,12 +24,14 @@
         </div>
     </nav> 
     
+    <form method="GET" action="/results">
     <div class="search">
-        <h2>Artist Search</h2>
-        <input type="text" id="search-box" oninput="fetchSuggestions()" placeholder="search for artist...">
+        <span class="search-icon material-symbols-outlined">search</span>
+            <input type="search" name="artist" id="search-box" oninput="fetchSuggestions()" placeholder="search for artist...">
+            <button type="submit"></button>
+        </div>
         <select id="suggestions-dropdown"></select>
-    </div>
-
+    </form>
 
     <div class="card-container">
         {{ range .Artists }}
