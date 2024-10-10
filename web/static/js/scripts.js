@@ -28,6 +28,7 @@ function populateDropdown(suggestions) {
 
     // make visible when dropdown has content
     dropdown.style.display = 'block';
+    dropdown.size = Math.min(suggestions.length, 5);
 
     // Add each suggestion to the dropdown
     suggestions.forEach(suggestion => {
@@ -42,6 +43,7 @@ function populateDropdown(suggestions) {
 function clearDropdown() {
     let dropdown = document.getElementById("suggestions-dropdown");
     dropdown.innerHTML = ""; // Clear all child options
+    dropdown.size = 0; //Reset dropdown size
 }
 
 function redirectToArtist() {
