@@ -1,7 +1,6 @@
 // Fetch suggestions based on the user's input
 function fetchSuggestions() {
     let query = document.getElementById("search-box").value;
-    console.log('Fetching suggestions for query:', query);
 
     if (query.length === 0) {
         // Clear dropdown if the input is empty
@@ -11,17 +10,8 @@ function fetchSuggestions() {
 
     // Perform AJAX request to the Go backend
     fetch(`/suggestions?artist=${encodeURIComponent(query)}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response not ok: '+ response.statusText)
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Received suggestions: ', data);
-            populateDropdown(data)
-
-        })
+        .then(response => response.json())
+        .then(data => populateDropdown(data))
         .catch(error => console.error('Error fetching suggestions:', error));
 }
 
@@ -29,6 +19,15 @@ function fetchSuggestions() {
 function populateDropdown(suggestions) {
     let dropdown = document.getElementById("suggestions-dropdown");
     clearDropdown(); // Clear previous suggestions
+
+    // Hide dorpdown menu when empty
+    if (suggestions.length === 0) {
+        dropdown.style.display = 'none';
+        return;
+    }
+
+    // make visible when dropdown has content
+    dropdown.style.display = 'block';
 
     // Add each suggestion to the dropdown
     suggestions.forEach(suggestion => {
@@ -45,12 +44,13 @@ function clearDropdown() {
     dropdown.innerHTML = ""; // Clear all child options
 }
 
-function redirectToSearchResults() {
-    const dropdown = document.getElementById("suggestions-dropdown");
-    const selectedOption = dropdown.options[dropdown.selectIndex];
+function redirectToArtist() {
+    let dropdown = document.getElementById("suggestions-dropdown");
+    let selectedArtistId = dropdown.value
 
-    if (selectedOption.value) {
-        const artistId = selectedOption.value;
-        window.location.href = `/artist/?id={artistId}`
+    if (selectedArtistId) {
+        window.location.href = `/artist/?id=${selectedArtistId}`;
     }
 }
+
+document.getElementById("suggestions-dropdown").addEventListener('click', redirectToArtist);
