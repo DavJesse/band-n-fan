@@ -128,8 +128,9 @@ func GetResults(ids []int, data api.Data) []api.Artist {
 }
 
 func SuggestHandler(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query().Get("q") // Retrieve search query from html form
-	results := SearchArtist(query)
+	query := r.URL.Query().Get("artist") // Retrieve search query from html form
+	ids := SearchArtist(query)
+	results := GetResults(ids, Data)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(results)
 }
