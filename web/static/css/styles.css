@@ -54,6 +54,12 @@ body {
     border-radius: 10px;
 }
 
+#suggestions-dropdown option:hover {
+    cursor: pointer;
+    background-color: #810a8b;
+    color: white
+}
+
 .search {
     --padding: 14px;
     width: max-content;
