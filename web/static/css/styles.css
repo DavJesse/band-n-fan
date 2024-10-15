@@ -42,7 +42,7 @@ body {
 
 #suggestions-dropdown {
     border: 1px solid #ccc;
-    width: 170%;
+    width: 28%;
     max-height: 150px;
     overflow-y: auto;
     display: none;
@@ -50,7 +50,8 @@ body {
     z-index: 1000;
     top: 18%;
     left: 0;
-    background-color: white;
+    background-color: rgb(254, 231, 255);
+    border-radius: 10px;
 }
 
 .search {
