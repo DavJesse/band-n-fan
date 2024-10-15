@@ -14,27 +14,28 @@
     
     <nav class="nav-bar">
         <div class="nav-div">
-            <div class="logo-container"><a href="#">GroupieTracker</a></div>
+            <div class="logo-container"><a href="/">GroupieTracker</a></div>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/locations">Locations</a></li>
                 <li><a href="/dates">Dates</a></li>
                 <li><a href="/relations">Relations</a></li>
             </ul>            
         </div>
-    </nav> 
+    </nav>
     
     <form method="GET" action="/results">
-    <div class="search">
-        <span class="search-icon material-symbols-outlined">search</span>
-            <input type="search" name="artist" id="search-box" oninput="fetchSuggestions()" placeholder="search for artist...">
-            <button type="submit"></button>
-        </div>
-        <select id="suggestions-dropdown"></select>
-    </form>
+        <div class="search">
+            <span class="search-icon material-symbols-outlined">search</span>
+                <input type="search" name="artist" id="search-box" oninput="fetchSuggestions()" placeholder="search for artist...">
+                <button type="submit"></button>
+            </div>
+            <select id="suggestions-dropdown"></select>
+        </form>
 
+    {{ if . }}
     <div class="card-container">
-        {{ range .Artists }}
+        {{ range . }}
         <div class="cards">
             <a href="/artist/?id={{ .Id }}">
             <img src="{{.Image}}" alt="{{.Name}}">
@@ -47,6 +48,10 @@
         </div>
         {{ end }}
     </div>
-    
+
+    {{ else }}
+    <p>No results found!</p>
+    {{end}}
+  
 </body>
 </html>
