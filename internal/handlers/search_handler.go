@@ -145,10 +145,12 @@ func IdExists(ids []int, id int) bool {
 
 func GetResults(ids []ResultIDs, data api.Data) []api.Artist {
 	var results []api.Artist
+	var usedIds []int
 
 	for i := range ids {
 		for _, artist := range data.Artists {
-			if ids[i].Id == artist.Id {
+			if ids[i].Id == artist.Id && !IdExists(usedIds, artist.Id) {
+				usedIds = append(usedIds, artist.Id)
 				results = append(results, artist)
 				break
 			}
