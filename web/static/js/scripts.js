@@ -33,8 +33,8 @@ function populateDropdown(suggestions) {
     // Add each suggestion to the dropdown
     suggestions.forEach(suggestion => {
         let option = document.createElement("option");
-        option.value = suggestion.id;
-        option.text = suggestion.name;
+        option.value = suggestion.Id;
+        option.text = `${suggestion.QueryResult} - ${suggestion.SearchParam}`;
         dropdown.appendChild(option);
     });
 }
