@@ -143,24 +143,25 @@ func IdExists(ids []int, id int) bool {
 	return false
 }
 
-func GetResults(ids []int, data api.Data) []api.Artist {
+func GetResults(ids []ResultIDs, data api.Data) []api.Artist {
 	var results []api.Artist
 
 	for i := range ids {
 		for _, artist := range data.Artists {
-			if ids[i] == artist.Id {
+			if ids[i].Id == artist.Id {
 				results = append(results, artist)
 				break
 			}
 		}
 	}
+
 	return results
 }
 
 func SuggestHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("artist") // Retrieve search query from html form
-	ids := SearchArtist(query)
-	results := GetResults(ids, Data)
+	results := SearchArtist(query)
+	//results := GetResults(ids, Data)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(results)
 }
