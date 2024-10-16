@@ -11,6 +11,12 @@ import (
 	"groupie-tracker/internal/api"
 )
 
+type ResultIDs struct {
+	QueryResult string
+	SearchParam string
+	Id          int
+}
+
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	// Restrict acces to '/search' page
 	if r.Method != "GET" {
@@ -41,32 +47,48 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func SearchArtist(query string) []int {
-	var resultIDs []int
+func SearchArtist(query string) []ResultIDs {
+	var results []ResultIDs
 	query = strings.ToLower(query)
 
 	// Search for matching artist
 	for _, artist := range Data.Artists {
 		// Search by name
-		if strings.Contains(strings.ToLower(artist.Name), query) && !IdExists(resultIDs, artist.Id) {
-			resultIDs = append(resultIDs, artist.Id)
+		if strings.Contains(strings.ToLower(artist.Name), query) {
+			band := ResultIDs{}
+			band.SearchParam = "Band Name"
+			band.Id = artist.Id
+			band.QueryResult = artist.Name
+			results = append(results, band)
 		}
 		// Search by FirstAlbum Date
-		if strings.Contains(artist.FirstAlbum, query) && !IdExists(resultIDs, artist.Id) {
-			resultIDs = append(resultIDs, artist.Id)
+		if strings.Contains(artist.FirstAlbum, query) {
+			band := ResultIDs{}
+			band.SearchParam = "First Album Date"
+			band.Id = artist.Id
+			band.QueryResult = artist.FirstAlbum
+			results = append(results, band)
 		}
 		// Search by creation date
 		if IsNumeric(query) {
 			date, _ := strconv.Atoi(query)
-			if date == artist.CreationDate && !IdExists(resultIDs, artist.Id) {
-				resultIDs = append(resultIDs, artist.Id)
+			if date == artist.CreationDate {
+				band := ResultIDs{}
+				band.SearchParam = "Creation Date"
+				band.Id = artist.Id
+				band.QueryResult = strconv.Itoa(artist.CreationDate)
+				results = append(results, band)
 			}
 		}
 
 		// Search by band members
 		for i := range artist.Members {
-			if strings.Contains(strings.ToLower(artist.Members[i]), query) && !IdExists(resultIDs, artist.Id) {
-				resultIDs = append(resultIDs, artist.Id)
+			if strings.Contains(strings.ToLower(artist.Members[i]), query) {
+				band := ResultIDs{}
+				band.SearchParam = "Band Member"
+				band.Id = artist.Id
+				band.QueryResult = artist.Members[i]
+				results = append(results, band)
 				break
 			}
 		}
@@ -75,8 +97,12 @@ func SearchArtist(query string) []int {
 	// Search for matching date
 	for _, dateObj := range Data.Dates.Index {
 		for _, date := range dateObj.Dates {
-			if strings.Contains(date, query) && !IdExists(resultIDs, dateObj.Id) {
-				resultIDs = append(resultIDs, dateObj.Id)
+			if strings.Contains(date, query) {
+				band := ResultIDs{}
+				band.SearchParam = "Tour Date"
+				band.Id = dateObj.Id
+				band.QueryResult = date
+				results = append(results, band)
 			}
 		}
 	}
@@ -84,13 +110,17 @@ func SearchArtist(query string) []int {
 	// Search for matching locations
 	for _, locationObj := range Data.Locations.Index {
 		for _, location := range locationObj.Locations {
-			if strings.Contains(location, query) && !IdExists(resultIDs, locationObj.Id) {
-				resultIDs = append(resultIDs, locationObj.Id)
+			if strings.Contains(location, query) {
+				band := ResultIDs{}
+				band.SearchParam = "Tour Location"
+				band.Id = locationObj.Id
+				band.QueryResult = location
+				results = append(results, band)
 			}
 		}
 	}
 
-	return resultIDs
+	return results
 }
 
 func IsNumeric(str string) bool {
