@@ -113,7 +113,7 @@ func SearchArtist(query string) []ResultIDs {
 		for _, location := range locationObj.Locations {
 			if strings.Contains(location, query) {
 				band := ResultIDs{}
-				band.SearchParam = "Tour Location"
+				band.SearchParam = "tour location"
 				band.Id = locationObj.Id
 				band.QueryResult = location
 				results = append(results, band)
