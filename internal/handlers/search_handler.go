@@ -163,22 +163,7 @@ func GetResults(ids []ResultIDs, data api.Data) []api.Artist {
 func SuggestHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("artist") // Retrieve search query from html form
 	results := SearchArtist(query)
-	//results := GetResults(ids, Data)
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(results)
 }
-
-// func IndexHandler(w http.ResponseWriter, r *http.Request) {
-// 	tmpl, err = template.ParseFiles("web/templates/search_results.html")
-// 	if err != nil {
-// 		InternalServerErrorHandler(w)
-// 		log.Println("Failed to load search template:", err)
-// 		return
-// 	}
-// 	err = tmpl.Execute(w, nil)
-// 	if err != nil {
-// 		InternalServerErrorHandler(w)
-// 		log.Println("Failed to load search template:", err)
-// 		return
-// 	}
-// }
