@@ -57,7 +57,7 @@ func SearchArtist(query string) []ResultIDs {
 		// Search by name
 		if strings.Contains(strings.ToLower(artist.Name), query) {
 			band := ResultIDs{}
-			band.SearchParam = "Band Name"
+			band.SearchParam = "artist/band"
 			band.Id = artist.Id
 			band.QueryResult = artist.Name
 			results = append(results, band)
@@ -65,7 +65,7 @@ func SearchArtist(query string) []ResultIDs {
 		// Search by FirstAlbum Date
 		if strings.Contains(artist.FirstAlbum, query) {
 			band := ResultIDs{}
-			band.SearchParam = "First Album Date"
+			band.SearchParam = "first album date"
 			band.Id = artist.Id
 			band.QueryResult = artist.FirstAlbum
 			results = append(results, band)
@@ -75,7 +75,7 @@ func SearchArtist(query string) []ResultIDs {
 			date, _ := strconv.Atoi(query)
 			if date == artist.CreationDate {
 				band := ResultIDs{}
-				band.SearchParam = "Creation Date"
+				band.SearchParam = "creation date"
 				band.Id = artist.Id
 				band.QueryResult = strconv.Itoa(artist.CreationDate)
 				results = append(results, band)
@@ -86,7 +86,7 @@ func SearchArtist(query string) []ResultIDs {
 		for i := range artist.Members {
 			if strings.Contains(strings.ToLower(artist.Members[i]), query) {
 				band := ResultIDs{}
-				band.SearchParam = "Band Member"
+				band.SearchParam = "member"
 				band.Id = artist.Id
 				band.QueryResult = artist.Members[i]
 				results = append(results, band)
@@ -100,7 +100,7 @@ func SearchArtist(query string) []ResultIDs {
 		for _, date := range dateObj.Dates {
 			if strings.Contains(date, query) {
 				band := ResultIDs{}
-				band.SearchParam = "Tour Date"
+				band.SearchParam = "tour date"
 				band.Id = dateObj.Id
 				band.QueryResult = date
 				results = append(results, band)
@@ -113,7 +113,7 @@ func SearchArtist(query string) []ResultIDs {
 		for _, location := range locationObj.Locations {
 			if strings.Contains(location, query) {
 				band := ResultIDs{}
-				band.SearchParam = "Tour Location"
+				band.SearchParam = "tour location"
 				band.Id = locationObj.Id
 				band.QueryResult = location
 				results = append(results, band)
