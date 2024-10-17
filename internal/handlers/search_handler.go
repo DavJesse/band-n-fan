@@ -11,6 +11,7 @@ import (
 	"groupie-tracker/internal/api"
 )
 
+// For consolodating data for results and suggestions
 type ResultIDs struct {
 	QueryResult string
 	SearchParam string
@@ -143,12 +144,14 @@ func IdExists(ids []int, id int) bool {
 	return false
 }
 
+// Retrieves result from api.Data based on matching query IDs retrieved
 func GetResults(ids []ResultIDs, data api.Data) []api.Artist {
 	var results []api.Artist
 	var usedIds []int
 
 	for i := range ids {
 		for _, artist := range data.Artists {
+			// Only append artists that don't exist in results
 			if ids[i].Id == artist.Id && !IdExists(usedIds, artist.Id) {
 				usedIds = append(usedIds, artist.Id)
 				results = append(results, artist)
@@ -160,10 +163,13 @@ func GetResults(ids []ResultIDs, data api.Data) []api.Artist {
 	return results
 }
 
+// SuggestHandler returns suggestions based on query
 func SuggestHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("artist") // Retrieve search query from html form
-	results := SearchArtist(query)
+	results := SearchArtist(query)       // Retrieve results from api.Data
 
+	// Marshal results to json,
+	// Which will be displayed on http:localhost:8080/suggestions?artist=${query}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(results)
 }
