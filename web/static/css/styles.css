@@ -52,6 +52,7 @@ body {
     left: 0;
     background-color: rgb(254, 231, 255);
     border-radius: 10px;
+    font-size: 20px;
 }
 
 #suggestions-dropdown option:hover {
