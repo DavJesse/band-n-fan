@@ -20,12 +20,6 @@ function populateDropdown(suggestions) {
     let dropdown = document.getElementById("suggestions-dropdown");
     clearDropdown(); // Clear previous suggestions
 
-    // Hide dorpdown menu when empty
-    if (suggestions.length === 0) {
-        dropdown.style.display = 'none';
-        return;
-    }
-
     // make visible when dropdown has content
     dropdown.style.display = 'block';
     dropdown.size = Math.min(suggestions.length, 5);
@@ -33,8 +27,8 @@ function populateDropdown(suggestions) {
     // Add each suggestion to the dropdown
     suggestions.forEach(suggestion => {
         let option = document.createElement("option");
-        option.value = suggestion.id;
-        option.text = suggestion.name;
+        option.value = suggestion.Id;
+        option.text = `${suggestion.QueryResult} - ${suggestion.SearchParam}`;
         dropdown.appendChild(option);
     });
 }
@@ -44,6 +38,7 @@ function clearDropdown() {
     let dropdown = document.getElementById("suggestions-dropdown");
     dropdown.innerHTML = ""; // Clear all child options
     dropdown.size = 0; //Reset dropdown size
+    dropdown.style.display = 'none'; // Hide dropdown menu when cleared
 }
 
 function redirectToArtist() {
