@@ -165,6 +165,10 @@ func GetResults(ids []ResultIDs, data api.Data) []api.Artist {
 
 // SuggestHandler returns suggestions based on query
 func SuggestHandler(w http.ResponseWriter, r *http.Request) {
+	if !strings.HasPrefix(r.URL.Path, "/suggestions") || r.URL.Query().Get("artist") == "" {
+		BadRequestHandler(w)
+		return
+	}
 	query := r.URL.Query().Get("artist") // Retrieve search query from html form
 	results := SearchArtist(query)       // Retrieve results from api.Data
 

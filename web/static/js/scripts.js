@@ -9,10 +9,15 @@ function fetchSuggestions() {
     }
 
     // Perform AJAX request to the Go backend
-    fetch(`/suggestions?artist=${encodeURIComponent(query)}`)
-        .then(response => response.json())
-        .then(data => populateDropdown(data))
-        .catch(error => console.error('Error fetching suggestions:', error));
+    fetch(`/suggestions?artist=${encodeURIComponent(query)}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => populateDropdown(data))
+    .catch(error => console.error('Error fetching suggestions:', error));
 }
 
 // Populate the dropdown with suggestions
