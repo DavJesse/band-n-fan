@@ -42,10 +42,23 @@ body {
 
 #suggestions-dropdown {
     border: 1px solid #ccc;
-    width: 170%;
+    width: 28%;
     max-height: 150px;
     overflow-y: auto;
     display: none;
+    position: absolute;
+    z-index: 1000;
+    top: 18%;
+    left: 0;
+    background-color: rgb(254, 231, 255);
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+#suggestions-dropdown option:hover {
+    cursor: pointer;
+    background-color: #810a8b;
+    color: white
 }
 
 .search {
@@ -77,6 +90,15 @@ body {
 #search-box::placeholder,
 .search-icon {
     color: rgba(0, 0, 0, 0.5);
+}
+
+#button {
+    border: none;
+    background: none;
+}
+
+#button:hover {
+    cursor: pointer;
 }
 
 h1 {
