@@ -19,6 +19,30 @@ type ResultIDs struct {
 }
 
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
+	if !strings.HasPrefix(r.URL.Path, "/results") {
+		BadRequestHandler(w)
+		return
+	}
+
+	query := r.URL.Query().Get("artist")
+	if query == "" {
+		// Check if there are any query parameters
+		if len(r.URL.Query()) == 0 {
+			BadRequestHandler(w)
+			return
+		}
+		// If there are query parameters but 'artist' is not one of them,
+		// try to find a potential misspelling
+		for key := range r.URL.Query() {
+			if key != "artist" {
+				BadRequestHandler(w)
+				return
+			}
+		}
+	}
+
+
+
 	// Restrict acces to '/search' page
 	if r.Method != "GET" {
 		BadRequestHandler(w)
@@ -34,7 +58,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	query := r.URL.Query().Get("artist") // Retrieve search query from html form
+	// query := r.URL.Query().Get("artist") // Retrieve search query from html form
 
 	ids := SearchArtist(query)       // Retrieve results
 	results := GetResults(ids, Data) // Retrieve results
