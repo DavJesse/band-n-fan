@@ -41,8 +41,6 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-
-
 	// Restrict acces to '/search' page
 	if r.Method != "GET" {
 		BadRequestHandler(w)
