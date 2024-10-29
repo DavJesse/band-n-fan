@@ -26,8 +26,10 @@ function populateDropdown(suggestions) {
     clearDropdown(); // Clear previous suggestions
 
     // make visible when dropdown has content
-    dropdown.style.display = 'block';
-    dropdown.size = Math.min(suggestions.length, 5);
+    if (suggestions.length > 0) {
+        dropdown.style.display = 'block';
+        dropdown.size = Math.min(suggestions.length, 5);
+    }
 
     // Add each suggestion to the dropdown
     suggestions.forEach(suggestion => {
