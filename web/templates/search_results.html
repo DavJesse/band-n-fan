@@ -26,7 +26,7 @@
     
     <form method="GET" action="/results">
         <div class="search">
-                <input type="search" name="artist" id="search-box" oninput="fetchSuggestions()" placeholder="search for artist...">
+                <input type="search" name="artist" id="search-box" oninput="fetchSuggestions()" placeholder="search for artist..." autocomplete="off">
                 <button type="submit" id="button"><span class="search-icon material-symbols-outlined">search</span></button>
             </div>
             <select id="suggestions-dropdown"></select>
