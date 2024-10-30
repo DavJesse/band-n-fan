@@ -1,3 +1,8 @@
+:root {
+    --base-font-size: 16px;
+    --scale-factor: 1vw;
+  }
+
 body {
     background-image: url('../images/background-1920x1201.jpg');
     background-size: cover; /* Fill screen(horizontally) with background*/
@@ -5,13 +10,13 @@ body {
     background-repeat: no-repeat; /*Only have one itereation of background image*/
     background-attachment: fixed; /*Fix background image despite scroll*/
     background-color: #020816; /* Use magenta background at the edge of background image */
+    font-size: var(--base-font-size);
 }
 
 .nav-bar {
     background: #810a8b;
     font-family: calibri;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 2% 3%;
 }
 
 
@@ -28,16 +33,16 @@ body {
 
 .nav-bar a {
     color: #eee;
-    font-size: 20px;
     font-weight: bold;
     margin-right: 40px;
+    font-size: calc(var(--base-font-size) + var(--scale-factor));
 }
 
 .logo-container a {
-    font-size: 50px;
     font-style: italic;
     font-weight: 600;
     color: #eee;
+    font-size: calc(var(--base-font-size) * 2 + var(--scale-factor));
 }
 
 #suggestions-dropdown {
@@ -70,6 +75,9 @@ body {
     border-radius: 28px;
     background: #f6f6f6;
     transition: box-shadow 0.25s;
+    margin: 10px auto; /* Centers the search bar horizontally and adds some vertical space */
+    width: 90%; /* Makes the search bar take up most of the width */
+    max-width: 300px; /* Limits the maximum width */
 }
 
 .search:focus-within {
@@ -104,7 +112,6 @@ body {
 h1 {
     margin: 17px;
     font-size: 28px;
-    /* text-align: center; */
     color: #FFFFFF;
 }
 
@@ -118,13 +125,13 @@ section {
     border: 1px solid #65016e;
     background-color: rgba(2, 8, 22, 0.5);
     border-radius: 10px;
-    padding: 20px;
-    max-width: 80%;
     margin: 0 auto;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 90%;
+    padding: 5%;
 }
 
 .view-more {
@@ -169,9 +176,9 @@ section {
 
 .item-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 .artist-item {
@@ -232,7 +239,11 @@ section {
     position: relative;
     margin-top: 20px;
     margin-left: 0px;
-    margin-right: 0px;
+    margin-right: 0px;  .search {
+        margin: 10px auto; /* Centers the search bar horizontally and adds some vertical space */
+        width: 90%; /* Makes the search bar take up most of the width */
+        max-width: 300px; /* Limits the maximum width */
+      }
     left: -20px;
     transform: none;
     padding-left:  20px;
@@ -382,56 +393,74 @@ img {
     }
 }
 
-@media (max-width: 768px) {
-    body {
-        background-image: url('../images/background-1280x801.jpg'); /* Use smaller image for mobile */
-        background-color: #020816; 
-    }
-    .nav-bar {
-        padding: 10px;
-    }
-    
-    .nav-bar a {
-        font-size: 16px;
-        margin-right: 20px;
-    }
-    
-    .logo-container a {
-        font-size: 30px;
-    }
-    
-    section {
-        max-width: 95%;
-    }
-    
-    h1 {
-        font-size: 24px;
-    }
-    
-    h2 {
-        font-size: 22px;
-    }
-    .nav-bar a, .back a {
-        padding: 10px;
-        margin: 5px;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-div {
-        flex-direction: column;
+@media (max-width: 1024px) {
+    :root {
+      --base-font-size: 14px;
     }
     
     .item-grid {
-        grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
-    
-    .artist-bio {
-        flex-direction: column;
-    }
-    
-    .artist-bio .image-container img {
-        width: 200px;
-        height: 200px;
-    }
+  }
+
+ @media (max-width: 768px) {
+  :root {
+    --base-font-size: 12px;
+  }
+  
+  .nav-div {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .logo-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .nav-bar ul {
+    justify-content: center;
+  }
+  
+  .nav-bar a {
+    font-size: calc(var(--base-font-size) * 1.5);
+    margin-right: 20px;
+  }
 }
+
+  @media (max-width: 480px) {
+    :root {
+      --base-font-size: 10px;
+    }
+    
+    .nav-div {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .logo-container {
+      margin-bottom: 10px;
+    }
+    
+    .nav-bar ul {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0;
+    }
+    
+    .nav-bar li {
+      margin: 0;
+    }
+    
+    .nav-bar a {
+      font-size: calc(var(--base-font-size) * 1.4);
+      margin-right: 0;
+      padding: 5px;
+    }
+    
+    .item-grid {
+      grid-template-columns: 1fr;
+    }
+  }
