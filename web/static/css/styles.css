@@ -187,6 +187,10 @@ section {
     margin-bottom: 10px;
 }
 
+.artist-header a {
+    color:aqua
+}
+
 .artist-item ul {
     list-style-type: none;
     padding: 0;
