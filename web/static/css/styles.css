@@ -60,7 +60,7 @@ body {
     max-width: 300px;
     left: 50%; /* Centers the dropdown */
     transform: translateX(-50%);
-    top: 24.8%; /* Removes the top positioning */
+    top: auto; /* Removes the top positioning */
 }
 
 #suggestions-dropdown option:hover {
@@ -95,7 +95,6 @@ body {
     outline: none;
     border: none;
     background: transparent;
-    /* width: 300px; */
     width: calc(100% - 40px);
 }
 
@@ -396,10 +395,6 @@ img {
     :root {
       --base-font-size: 14px;
     }
-
-    #suggestions-dropdown {
-        top: 20%;
-    }
     
     .item-grid {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -440,10 +435,6 @@ img {
     .nav-div {
       flex-direction: column;
       align-items: center;
-    }
-
-    #suggestions-dropdown {
-        top: 22%;
     }
     
     .logo-container {
