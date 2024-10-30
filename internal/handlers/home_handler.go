@@ -39,7 +39,11 @@ func loadHomeTemplate() error {
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" || r.URL.Path != "/" {
+	// capture query parameters from the URL (if any)
+	query := r.URL.Query()
+
+	// Restrict access to the home page only if the request method is GET and the path is /
+	if r.Method != "GET" || r.URL.Path != "/" || len(query) > 0 {
 		BadRequestHandler(w)
 		return
 	}
