@@ -112,7 +112,6 @@ func SearchArtist(query string) []ResultIDs {
 				band.Id = artist.Id
 				band.QueryResult = artist.Members[i]
 				results = append(results, band)
-				break
 			}
 		}
 	}
