@@ -20,7 +20,9 @@ var LoadTemplate = func() (*template.Template, error) {
 	return template.ParseFiles("web/templates/error.html")
 }
 
+// Serves Bad Request error page
 func BadRequestHandler(w http.ResponseWriter) {
+	w.WriteHeader(http.StatusBadRequest)
 	tmpl, err := LoadTemplate()
 	if err != nil {
 		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
@@ -37,7 +39,9 @@ func BadRequestHandler(w http.ResponseWriter) {
 	}
 }
 
+// Serves Internal Server Error page
 func InternalServerErrorHandler(w http.ResponseWriter) {
+	w.WriteHeader(http.StatusInternalServerError)
 	tmpl, err := LoadTemplate()
 	if err != nil {
 		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
@@ -54,7 +58,9 @@ func InternalServerErrorHandler(w http.ResponseWriter) {
 	}
 }
 
+// Serves Not Found error page
 func NotFoundHandler(w http.ResponseWriter) {
+	w.WriteHeader(http.StatusNotFound)
 	tmpl, err := LoadTemplate()
 	if err != nil {
 		http.Error(w, "Could not load template, error page unavailable", http.StatusInternalServerError)
