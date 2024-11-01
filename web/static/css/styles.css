@@ -243,10 +243,11 @@ section {
     margin-top: 20px;
     margin-left: 0px;
     margin-right: 0px;
-    left: -20px;
+    left: 5px;
+    right: 5px;
     transform: none;
     padding-left:  20px;
-    padding-right: 20;
+    padding-right: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -263,6 +264,8 @@ section {
     width: 320px;
     height: 320px;
     border-radius: 50%;
+    max-width: 100%;
+    height: auto;
 }
 
 .artist-bio .text-container {
@@ -425,6 +428,21 @@ img {
     font-size: calc(var(--base-font-size) * 1.5);
     margin-right: 20px;
   }
+
+  .artist-bio {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .artist-bio .image-container {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .artist-bio .image-container img {
+    width: 250px;
+    height: 250px;
+  }
 }
 
   @media (max-width: 480px) {
@@ -461,4 +479,13 @@ img {
     .item-grid {
       grid-template-columns: 1fr;
     }
+
+    .artist-bio {
+        padding: auto;
+    }
+
+    .artist-bio .image-container img {
+        width: 200px;
+        height: 200px;
+      }
   }
